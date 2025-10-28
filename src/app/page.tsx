@@ -1,4 +1,4 @@
-﻿import Header from '../components/Header';
+import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Projects from '../components/Projects';
@@ -17,7 +17,7 @@ export default function Home() {
   const sectionOffset = 'scroll-mt-28 md:scroll-mt-32';
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="relative z-10 flex min-h-screen flex-col">
       <Header />
       <main className="flex-grow">
 
@@ -35,10 +35,8 @@ export default function Home() {
         <StarryProjectGrid
           id="highlights"
           title="Highlights"
-          withGradient
-          withStarfield
-          starCount={150}
-          meteorEveryMs={2600}
+          withGradient={false}
+          withStarfield={false}
           containerClassName="container mx-auto px-0 mb-12 space-y-12"
         >
           {/* Education is not linked in the navbar, but we can still give it an id if you ever add it */}

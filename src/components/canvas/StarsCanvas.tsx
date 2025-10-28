@@ -8,7 +8,7 @@ import type { Points as PointsImpl } from 'three';
 
 const Stars = (props: PointsProps) => {
   const ref = useRef<PointsImpl | null>(null);
-  const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.2 }));
+  const [sphere] = useState(() => random.inSphere(new Float32Array(6000), { radius: 1.8 }));
 
   useFrame((_, delta) => {
     if (!ref.current) return;
@@ -28,7 +28,7 @@ const Stars = (props: PointsProps) => {
         <PointMaterial
           transparent
           color="#f272c8"
-          size={0.002}
+          size={0.0018}
           sizeAttenuation
           depthWrite={false}
         />
@@ -40,7 +40,7 @@ const Stars = (props: PointsProps) => {
 const StarsCanvas = () => {
   return (
     <div className="pointer-events-none absolute inset-0 z-0">
-      <Canvas camera={{ position: [0, 0, 1] }}>
+      <Canvas camera={{ position: [0, 0, 1.35] }}>
         <Suspense fallback={null}>
           <Stars />
         </Suspense>

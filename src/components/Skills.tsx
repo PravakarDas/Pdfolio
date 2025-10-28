@@ -69,8 +69,8 @@ export default function Skills() {
   const [active, setActive] = useState<'All' | Category>('All');
 
   const filtered = useMemo(
-    () => (active === 'All' ? SKILLS : SKILLS.filter(s => s.category === active)),
-    [active]
+    () => (active === 'All' ? SKILLS : SKILLS.filter((skill) => skill.category === active)),
+    [active],
   );
 
   return (
@@ -80,28 +80,29 @@ export default function Skills() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: 'easeInOut' }}
       viewport={{ once: true }}
-      className="scroll-mt-24 bg-white p-6 rounded-2xl shadow-lg space-y-6"
+      className="scroll-mt-24 space-y-6 rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
       aria-labelledby="skills-heading"
     >
-      <h3 id="skills-heading" className="text-2xl font-bold text-gray-800 border-b pb-3 flex items-center gap-2">
-        <Code className="w-6 h-6 text-blue-600" />
+      <h3
+        id="skills-heading"
+        className="flex items-center gap-2 border-b border-white/10 pb-3 text-2xl font-bold text-white"
+      >
+        <Code className="h-6 w-6 text-sky-300" />
         Skills
       </h3>
 
-      {/* Tabs */}
       <div className="flex flex-wrap gap-2">
-        {TABS.map(tab => {
+        {TABS.map((tab) => {
           const isActive = tab === active;
           return (
             <button
               key={tab}
               onClick={() => setActive(tab)}
-              className={[
-                'px-3 py-1.5 rounded-full text-sm border transition',
+              className={`rounded-full border px-3 py-1.5 text-sm transition ${
                 isActive
-                  ? 'bg-blue-600 text-white border-blue-600'
-                  : 'bg-white text-gray-700 border-gray-200 hover:border-blue-400 hover:text-blue-700',
-              ].join(' ')}
+                  ? 'border-sky-400/60 bg-sky-500/30 text-white shadow-[0_10px_30px_rgba(45,170,255,0.2)]'
+                  : 'border-white/10 bg-white/5 text-slate-200 hover:border-sky-400/50 hover:text-white'
+              }`}
               aria-pressed={isActive}
             >
               {tab}
@@ -110,14 +111,13 @@ export default function Skills() {
         })}
       </div>
 
-      {/* Grid */}
       <motion.div
         layout
-        className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4"
         role="list"
         aria-label={`${active} skills`}
       >
-        {filtered.map(skill => (
+        {filtered.map((skill) => (
           <motion.div
             layout
             key={`${skill.name}-${skill.category}`}
@@ -131,17 +131,15 @@ export default function Skills() {
               alt={skill.alt}
               width={60}
               height={60}
-              className="object-contain "
+              className="object-contain"
               loading="lazy"
             />
-            <span className="text-sm text-gray-700 mt-2 text-center">{skill.name}</span>
+            <span className="mt-2 text-center text-sm text-slate-200">{skill.name}</span>
           </motion.div>
         ))}
       </motion.div>
 
-      <p className="text-sm text-gray-500">
-        Always learning — this list will keep growing!
-      </p>
+      <p className="text-sm text-slate-300">Always learning — this list will keep growing!</p>
     </motion.section>
   );
 }

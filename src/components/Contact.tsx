@@ -15,11 +15,6 @@ const EarthCanvas = dynamic(() => import('./canvas/EarthCanvas'), {
   ),
 });
 
-const StarsCanvas = dynamic(() => import('./canvas/StarsCanvas'), {
-  ssr: false,
-  loading: () => null,
-});
-
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -174,8 +169,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#050816] py-20 scroll-mt-28 md:scroll-mt-32">
-      <StarsCanvas />
+    <section id="contact" className="relative overflow-hidden py-20 scroll-mt-28 md:scroll-mt-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(110,77,255,0.15),transparent_55%)]" />
       <div className="pointer-events-none absolute bottom-[-40%] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-sky-500/20 blur-[140px]" />
 

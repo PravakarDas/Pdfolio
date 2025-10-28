@@ -2,7 +2,6 @@
 
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import BackToTop from './BackToTop';
-import ThemeToggle from './ThemeToggle';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 
 export default function Footer() {
@@ -32,10 +31,10 @@ export default function Footer() {
   };
 
   const linkClasses =
-    'group relative inline-flex items-center text-sm sm:text-base text-gray-300 hover:text-white transition';
+    'group relative inline-flex items-center text-sm sm:text-base text-slate-300 transition hover:text-white';
 
   return (
-    <footer className="bg-gray-900 text-white py-10 relative border-t border-white/10">
+    <footer className="relative border-t border-white/10 bg-transparent py-10 text-white">
       <motion.div
         className="container mx-auto px-6"
         variants={container}
@@ -59,7 +58,7 @@ export default function Footer() {
                 title="GitHub"
                 whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-full"
+                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
               >
                 <FaGithub size={28} />
               </motion.a>
@@ -73,7 +72,7 @@ export default function Footer() {
                 title="LinkedIn"
                 whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-full"
+                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
               >
                 <FaLinkedin size={28} />
               </motion.a>
@@ -85,16 +84,13 @@ export default function Footer() {
                 title="Email"
                 whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-full"
+                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
               >
                 <FaEnvelope size={28} />
               </motion.a>
             </li>
           </motion.ul>
 
-          <motion.div variants={item}>
-            <ThemeToggle />
-          </motion.div>
         </div>
 
         {/* Link row with glowing underline */}
@@ -111,14 +107,14 @@ export default function Footer() {
               {l.label}
               {/* underline */}
               <span
-                className="pointer-events-none absolute left-0 -bottom-0.5 h-px w-0 bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500
+                className="pointer-events-none absolute left-0 -bottom-0.5 h-px w-0 bg-gradient-to-r from-sky-300 via-indigo-400 to-indigo-500
                            opacity-0 blur-[0.5px] transition-all duration-300 ease-out
                            group-hover:w-full group-hover:opacity-100"
                 aria-hidden="true"
               />
               {/* glow */}
               <span
-                className="pointer-events-none absolute left-0 -bottom-0.5 h-[3px] w-0 bg-blue-500/40 rounded-full
+                className="pointer-events-none absolute left-0 -bottom-0.5 h-[3px] w-0 rounded-full bg-sky-500/40
                            opacity-0 blur-[4px] transition-all duration-300 ease-out
                            group-hover:w-full group-hover:opacity-100"
                 aria-hidden="true"
@@ -135,9 +131,9 @@ export default function Footer() {
         />
         <motion.p
           variants={item}
-          className="mt-3 text-center text-xs sm:text-sm text-gray-400"
+          className="mt-3 text-center text-xs sm:text-sm text-slate-400"
         >
-          &copy; {new Date().getFullYear()} Hemant Kumar Â· Built with passion, Next.js & Tailwind
+          &copy; {new Date().getFullYear()} Hemant Kumar - Built with passion, Next.js & Tailwind
         </motion.p>
       </motion.div>
 
@@ -146,6 +142,9 @@ export default function Footer() {
     </footer>
   );
 }
+
+
+
 
 
 

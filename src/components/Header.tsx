@@ -167,10 +167,10 @@ export default function Header() {
   return (
     <header ref={headerRef} className="sticky top-0 z-50">
       {/* Hairline gradient like a premium navbar */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-blue-600/40 to-transparent" />
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
 
       {/* Glassy bar */}
-      <div className="backdrop-blur supports-[backdrop-filter]:bg-white/65 bg-white/90 shadow-[0_1px_6px_rgba(0,0,0,0.06)]">
+      <div className="border-b border-white/10 bg-[#050816]/80 shadow-[0_12px_30px_rgba(6,10,30,0.45)] backdrop-blur">
         <nav
           className="container mx-auto flex items-center justify-between px-6 py-3 md:py-4"
           aria-label="Primary"
@@ -178,17 +178,17 @@ export default function Header() {
           {/* Left: badge */}
           <div className="flex items-center gap-3 md:gap-4">
             <span
-              className="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700 ring-1 ring-emerald-600/20"
+              className="inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3 py-1 text-sm font-medium text-emerald-200 shadow-[0_10px_25px_rgba(16,185,129,0.25)]"
               title="Open to Work"
             >
-              â— Open to Work
+              Open to Work
             </span>
           </div>
 
           {/* Hamburger */}
           <button
             ref={buttonRef}
-            className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+            className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-200 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
             onClick={() => setIsOpen((v) => !v)}
             aria-label="Toggle navigation menu"
             aria-expanded={isOpen}
@@ -201,8 +201,8 @@ export default function Header() {
           <ul
             id="site-menu"
             ref={menuRef}
-            className={`absolute left-0 top-full w-full bg-white px-6 py-4 transition-[opacity,transform] duration-200 ease-out lg:static lg:flex lg:w-auto lg:items-center lg:gap-6 lg:bg-transparent lg:px-0 lg:py-0
-              ${isOpen ? "opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-2 lg:pointer-events-auto lg:opacity-100 lg:translate-y-0"}
+            className={`absolute left-0 top-full w-full border-b border-white/10 bg-[#050816]/95 px-6 py-4 transition-[opacity,transform] duration-200 ease-out lg:static lg:flex lg:w-auto lg:items-center lg:gap-6 lg:border-none lg:bg-transparent lg:px-0 lg:py-0
+              ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0 lg:pointer-events-auto lg:translate-y-0 lg:opacity-100"}
             `}
           >
             {navLinks.map(({ href, label }) => {
@@ -213,8 +213,8 @@ export default function Header() {
                     href={href}
                     onClick={handleNavClick(href)}
                     aria-current={isActive ? "page" : undefined}
-                    className={`block rounded-md px-2 py-2 text-sm md:text-[15px] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2
-                      ${isActive ? "text-blue-700 font-semibold" : "text-gray-700 hover:text-blue-700"}
+                    className={`block rounded-md px-2 py-2 text-sm text-slate-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400
+                      ${isActive ? "font-semibold text-white" : "hover:text-white/90"}
                     `}
                   >
                     {label}
@@ -236,7 +236,5 @@ export default function Header() {
 // 2) Optionally add `scroll-smooth` to <html> or body for native smooth scrolling.
 //    Since we handle smooth scrolling programmatically, this is optional.
 // 3) Make sure each target section id matches nav hrefs exactly.
-
-
 
 

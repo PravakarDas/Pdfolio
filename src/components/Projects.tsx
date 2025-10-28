@@ -89,8 +89,8 @@ export default function Projects() {
       id="projects"
       title="Some of my Projects!"
       projects={projects}
-      withGradient
-      withStarfield
+      withGradient={false}
+      withStarfield={false}
       starCount={200}
       meteorEveryMs={2800}
       gridColsClassName="grid-cols-1 md:grid-cols-2 lg:grid-cols-3"

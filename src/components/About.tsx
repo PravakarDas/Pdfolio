@@ -59,7 +59,7 @@ function Starfield({
       const startX = Math.random() < 0.5 ? -20 : Math.random() * (w + 40) - 20;
       const startY = -30;
       const speed = 4 + Math.random() * 3;
-      const angle = Math.PI / 3 + Math.random() * 0.25; // ~60-75Â°
+      const angle = Math.PI / 3 + Math.random() * 0.25; // ~60-75 deg
       meteors.push({
         x: startX,
         y: startY,
@@ -181,7 +181,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 py-20 text-white scroll-mt-16 md:scroll-mt-18"
+      className="relative overflow-hidden py-20 text-white scroll-mt-16 md:scroll-mt-18"
     >
       {/* glows behind everything */}
       <div className="pointer-events-none absolute -top-16 -left-24 h-56 w-56 rounded-full bg-white/10 blur-3xl -z-10" />
@@ -230,7 +230,7 @@ export default function About() {
               I care about clean APIs, great UX, and CI/CD that keeps shipping fast and reliable.
             </p>
             <p className="text-base leading-7 text-white/90">
-              Comfortable across the stackâ€”from component systems and data models to Docker,
+              Comfortable across the stack"from component systems and data models to Docker,
               caching, and deployments on <strong>AWS/GCP</strong>.
             </p>
 
@@ -278,9 +278,9 @@ export default function About() {
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
             variants={staggerCol}
-            className="rounded-2xl bg-white p-6 ring-1 ring-slate-200 shadow-sm"
+            className="rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
           >
-            <motion.h3 variants={item} className="mb-4 text-xl font-semibold text-slate-900">
+            <motion.h3 variants={item} className="mb-4 text-xl font-semibold text-white">
               Core Competencies
             </motion.h3>
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -294,8 +294,8 @@ export default function About() {
                 'Docker & CI/CD (GitHub Actions)',
                 'AWS / GCP Deployments',
               ].map((text) => (
-                <motion.li key={text} variants={item} className="flex items-start gap-3 text-sm text-slate-800">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" aria-hidden="true" />
+                <motion.li key={text} variants={item} className="flex items-start gap-3 text-sm text-slate-100">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" aria-hidden="true" />
                   <span>{text}</span>
                 </motion.li>
               ))}
@@ -306,6 +306,11 @@ export default function About() {
     </section>
   );
 }
+
+
+
+
+
 
 
 

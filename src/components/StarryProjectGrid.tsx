@@ -242,7 +242,7 @@ function TiltCard({
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX: reduce || isTouch ? 0 : srx, rotateY: reduce || isTouch ? 0 : sry }}
-      className="bg-white p-6 rounded-lg shadow-md h-full flex flex-col transition-transform will-change-transform text-slate-800"
+      className="flex h-full flex-col rounded-lg border border-white/10 bg-[#0f102b]/75 p-6 text-slate-100 shadow-[0_18px_40px_rgba(6,10,30,0.45)] transition-transform backdrop-blur will-change-transform"
       whileHover={{
         y: reduce ? 0 : -6,
         scale: reduce ? 1 : 1.02,
@@ -427,7 +427,9 @@ export default function StarryProjectGrid({
     <section
       id={id}
       style={{ ['--tint' as string]: tintColor }}
-      className={`relative overflow-hidden py-20 scroll-mt-5 md:scroll-mt-8 ${withGradient ? `${gradientClassName} text-white` : ''}`}
+      className={`relative overflow-hidden py-20 scroll-mt-5 md:scroll-mt-8 ${
+        withGradient ? `${gradientClassName} text-white` : 'text-slate-100'
+      }`}
       aria-label={title}
     >
       {/* Background */}
@@ -442,7 +444,9 @@ export default function StarryProjectGrid({
       <div className="container mx-auto px-6 relative z-10">
         {title && (
           <motion.h2
-            className={`text-3xl font-bold text-center mb-8 ${withGradient ? 'text-white' : 'text-gray-800'}`}
+            className={`text-3xl font-bold text-center mb-8 ${
+              withGradient ? 'text-white' : 'text-slate-100'
+            }`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE }}
@@ -475,7 +479,7 @@ export default function StarryProjectGrid({
                     {/* Platform badge */}
                     {platformLabel && (
                       <div
-                        className="absolute left-1 top-1 z-10 inline-flex items-center gap-1 rounded-full bg-white/90 px-1 py-1 text-[10px] font-medium text-slate-800 ring-1 ring-slate-200 shadow-sm"
+                        className="absolute left-1 top-1 z-10 inline-flex items-center gap-1 rounded-full bg-white/15 px-1 py-1 text-[10px] font-medium text-white ring-1 ring-white/30 shadow-sm backdrop-blur"
                         title={platformLabel}
                       >
                         {isMobile ? (
@@ -503,11 +507,11 @@ export default function StarryProjectGrid({
                   </div>
 
                   {/* Force dark text on white cards for readability */}
-                  <h3 className="text-xl font-semibold mb-2 text-slate-900">
+                  <h3 className="mb-2 text-xl font-semibold text-white">
                     {p.title}
                   </h3>
 
-                  <p className="text-slate-600 text-[13px] leading-[1.6] md:text-[15px] md:leading-[1.65]">
+                  <p className="text-[13px] leading-[1.6] text-slate-300 md:text-[15px] md:leading-[1.65]">
                     {p.description}
                   </p>
 
@@ -536,7 +540,7 @@ export default function StarryProjectGrid({
                         whileInView={{ opacity: 1, y: 0 }}
                         whileHover={{ scale: reduce ? 1 : 1.14 }}
                         transition={{ duration: 0.35, ease: EASE }}
-                        className="group relative flex items-center gap-1 text-blue-600"
+                        className="group relative flex items-center gap-1 text-sky-300"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -554,7 +558,7 @@ export default function StarryProjectGrid({
                         whileInView={{ opacity: 1, y: 0 }}
                         whileHover={{ scale: reduce ? 1 : 1.14 }}
                         transition={{ duration: 0.35, ease: EASE, delay: 0.05 }}
-                        className="group relative flex items-center gap-1 text-slate-700"
+                        className="group relative flex items-center gap-1 text-slate-300"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

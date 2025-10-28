@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { BadgeCheck, ChevronDown, ChevronUp, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -86,8 +86,8 @@ export default function Certifications() {
   const isGridMd = useMediaQuery('(min-width: 768px) and (max-width: 1023.98px)');
   const isGridLgUp = useMediaQuery('(min-width: 1024px)');
 
-  const MD_DEFAULT = 4; // 2×2
-  const LG_DEFAULT = 6; // 3×3
+  const MD_DEFAULT = 4; // 2-2
+  const LG_DEFAULT = 6; // 3-3
 
   // horizontal scroller state (mobile)
   const scrollerRef = React.useRef<HTMLDivElement | null>(null);
@@ -181,17 +181,17 @@ export default function Certifications() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: 'easeInOut' }}
         viewport={{ once: true, amount: 0.2 }}
-        className="relative mt-10 rounded-2xl bg-white p-6 shadow-lg ring-1 ring-slate-200"
+        className="relative mt-10 rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 text-slate-100 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
         aria-labelledby="certs-heading"
       >
-        <h3 id="certs-heading" className="flex items-center gap-2 border-b pb-3 text-2xl font-bold text-gray-800">
-          <BadgeCheck className="h-6 w-6 text-blue-600" aria-hidden="true" />
+        <h3 id="certs-heading" className="flex items-center gap-2 border-b border-white/10 pb-3 text-2xl font-bold text-white">
+          <BadgeCheck className="h-6 w-6 text-sky-300" aria-hidden="true" />
           Certifications
         </h3>
 
         {/* mobile edge fades */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-20 left-0 w-10 bg-gradient-to-r from-white to-transparent md:hidden z-0" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-20 right-0 w-10 bg-gradient-to-l from-white to-transparent md:hidden z-0" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-20 left-0 z-0 w-10 bg-gradient-to-r from-[#0f102b] to-transparent md:hidden" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-20 right-0 z-0 w-10 bg-gradient-to-l from-[#0f102b] to-transparent md:hidden" />
 
         {/* scroller / grid container */}
         <div
@@ -225,8 +225,8 @@ export default function Certifications() {
                     className="
                       group relative block min-w-[325px] max-w-[325px] sm:min-w-[350px] sm:max-w-[350px]
                       md:min-w-0 md:max-w-none flex-shrink-0 rounded-xl
-                      bg-gray-50 p-4 shadow-md ring-1 ring-slate-200 transition
-                      hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600
+                      border border-white/10 bg-[#0f102b]/70 p-4 text-slate-100 shadow-[0_16px_40px_rgba(6,10,30,0.45)] transition
+                      hover:border-sky-400/40 hover:shadow-[0_18px_45px_rgba(45,170,255,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400
                     "
                     whileHover={{ y: -4, scale: 1.03, transition: { duration: 0.22 } }}
                   >
@@ -242,8 +242,8 @@ export default function Certifications() {
                     )}
 
                     {/* Image */}
-                    <div className="mb-3 rounded-lg bg-white">
-                      <div className="relative flex items-center justify-center overflow-hidden rounded-lg h-[200px] sm:h-[220px] md:h-[220px] lg:h-[260px]">
+                    <div className="mb-3 rounded-lg border border-white/10 bg-white/5">
+                      <div className="relative flex h-[200px] items-center justify-center overflow-hidden rounded-lg sm:h-[220px] md:h-[220px] lg:h-[260px]">
                         <Image
                           src={cert.image}
                           alt={cert.title}
@@ -268,7 +268,7 @@ export default function Certifications() {
                         </span>
                       )}
                       {cert.year && (
-                        <span className={['ml-3 inline-flex items-center rounded-full px-2 py-1 text-[11px] font-semibold', theme.yearPill, 'ring-1 ring-black/10 shadow-sm'].join(' ')}>
+                        <span className={['ml-3 inline-flex items-center rounded-full px-2 py-1 text-[11px] font-semibold', theme.yearPill, 'ring-1 ring-white/10 shadow-sm'].join(' ')}>
                           {cert.year}
                         </span>
                       )}
@@ -280,7 +280,7 @@ export default function Certifications() {
           </ul>
         </div>
 
-        {/* pagination dots — only on horizontal (mobile) */}
+        {/* pagination dots " only on horizontal (mobile) */}
         {isHorizontal && pageCount > 1 && (
           <nav className="mt-4 flex justify-center md:hidden" aria-label="Certification pages">
             <ul className="flex items-center gap-2">
@@ -302,13 +302,13 @@ export default function Certifications() {
           </nav>
         )}
 
-        {/* View all — only on grid (md 2×2 or lg 3×3), not on horizontal */}
+        {/* View all " only on grid (md 2-2 or lg 3-3), not on horizontal */}
         {((isGridMd && certifications.length > MD_DEFAULT) || (isGridLgUp && certifications.length > LG_DEFAULT)) && (
           <div className="mt-6 flex justify-center">
             <button
               type="button"
               onClick={() => setShowAllGrid(s => !s)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm transition hover:border-blue-500 hover:text-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:border-sky-400/40 hover:bg-sky-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
               aria-expanded={showAllGrid}
               aria-controls="certs-list"
             >
@@ -324,3 +324,7 @@ export default function Certifications() {
     </section>
   );
 }
+
+
+
+

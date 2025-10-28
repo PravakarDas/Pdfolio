@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white"
+      className="relative overflow-hidden text-white"
       aria-label="Intro section"
     >
       {/* Decorative glow (behind everything) */}

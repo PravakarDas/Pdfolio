@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useReducedMotion, motion, type Variants } from 'framer-motion';
 import { CalendarCheck2 } from 'lucide-react';
@@ -15,7 +15,7 @@ type Role = {
 const roles: Role[] = [
   {
     companyStyled: (
-      <div className="text-lg font-semibold flex flex-wrap items-center text-slate-900">
+      <div className="text-lg font-semibold flex flex-wrap items-center text-white">
         <span style={{ color: '#4285F4' }}>G</span>
         <span style={{ color: '#DB4437' }}>o</span>
         <span style={{ color: '#F4B400' }}>o</span>
@@ -31,7 +31,7 @@ const roles: Role[] = [
       </div>
     ),
     title: 'Cloud Support Analyst',
-    period: 'Dec 2022 – Aug 2023',
+    period: 'Dec 2022 -" Aug 2023',
     side: 'left',
     bullets: [
       'Provided real-time support across Compute Engine, Cloud Run, Cloud Storage, Cloud SQL, IAM/IAP, and networking.',
@@ -42,13 +42,13 @@ const roles: Role[] = [
   },
   {
     companyStyled: (
-      <div className="text-lg font-semibold text-slate-900">
+      <div className="text-lg font-semibold text-white">
         <span className="text-orange-500">X</span>
         <span>pheno Pvt Limited</span>
       </div>
     ),
     title: 'Talent Acquisition Specialist',
-    period: 'Jan 2022 – Nov 2022',
+    period: 'Jan 2022 -" Nov 2022',
     side: 'right',
     bullets: [
       'Owned full-cycle recruiting for technical roles; partnered with hiring managers to refine role profiles.',
@@ -70,18 +70,17 @@ export default function Experience() {
   return (
     <section
       id="experience"
-      className="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white"
+      className="relative overflow-hidden bg-[#050816] text-white"
       aria-label="Experience"
     >
-      {/* Decorative glows to match Hero/About */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-indigo-300/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(110,77,255,0.15),transparent_55%)]" />
+      <div className="pointer-events-none absolute bottom-[-40%] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-sky-500/20 blur-[140px]" />
 
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.2 }}
-        className="container mx-auto px-6 py-20 md:py-28"
+        className="container relative z-10 mx-auto px-6 py-20 md:py-28"
       >
         <h3 className="text-2xl font-bold border-b border-white/20 pb-3 flex items-center gap-2">
           <CalendarCheck2 className="w-6 h-6 text-white" />
@@ -91,7 +90,7 @@ export default function Experience() {
         <p className="text-white/90 mt-5 mb-10 max-w-3xl">
           I bring over 2 years of IT experience, beginning in Talent Acquisition before transitioning into a
           technical role as a Cloud Support Analyst at Google Operations Center. This shift helped me uncover my
-          passion—designing and building digital products that solve real-world problems.
+          passion-"designing and building digital products that solve real-world problems.
         </p>
 
         {/* Timeline */}
@@ -130,16 +129,16 @@ export default function Experience() {
                       {isLeft && (
                         <motion.div
                           variants={card}
-                          className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 text-slate-800"
+                          className="rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 text-slate-100 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
                         >
                           {r.companyStyled}
-                          <p className="text-sm text-slate-600">{r.title}</p>
-                          <div className="mt-2 text-sm text-slate-500 flex md:justify-end">
+                          <p className="text-sm text-slate-200">{r.title}</p>
+                          <div className="mt-2 flex justify-end text-sm text-slate-300 md:justify-end">
                             <span className="inline-flex items-center gap-1">
-                              <CalendarCheck2 className="w-4 h-4" /> {r.period}
+                              <CalendarCheck2 className="h-4 w-4 text-sky-300" /> {r.period}
                             </span>
                           </div>
-                          <ul className="mt-3 text-sm text-slate-700 space-y-1 list-disc md:list-inside">
+                          <ul className="mt-3 space-y-1 list-disc text-sm text-slate-200 md:list-inside">
                             {r.bullets.map((b, idx) => (
                               <li key={idx}>{b}</li>
                             ))}
@@ -156,16 +155,16 @@ export default function Experience() {
                       {!isLeft && (
                         <motion.div
                           variants={card}
-                          className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 text-slate-800"
+                          className="rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 text-slate-100 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
                         >
                           {r.companyStyled}
-                          <p className="text-sm text-slate-600">{r.title}</p>
-                          <div className="mt-2 text-sm text-slate-500">
+                          <p className="text-sm text-slate-200">{r.title}</p>
+                          <div className="mt-2 text-sm text-slate-300">
                             <span className="inline-flex items-center gap-1">
-                              <CalendarCheck2 className="w-4 h-4" /> {r.period}
+                              <CalendarCheck2 className="h-4 w-4 text-sky-300" /> {r.period}
                             </span>
                           </div>
-                          <ul className="mt-3 text-sm text-slate-700 space-y-1 list-disc list-inside">
+                          <ul className="mt-3 space-y-1 list-disc text-sm text-slate-200 list-inside">
                             {r.bullets.map((b, idx) => (
                               <li key={idx}>{b}</li>
                             ))}
@@ -182,9 +181,10 @@ export default function Experience() {
 
         <p className="text-white/90 mt-10 max-w-3xl">
           Today, I work as a Full Stack Developer, specializing in Next.js, React.js, MongoDB, TypeScript, Python,
-          and Tailwind CSS—delivering modern, responsive, and scalable web and mobile applications with a seamless UX.
+          and Tailwind CSS-"delivering modern, responsive, and scalable web and mobile applications with a seamless UX.
         </p>
       </motion.div>
     </section>
   );
 }
+
