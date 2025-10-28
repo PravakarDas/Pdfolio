@@ -18,18 +18,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
         <Providers>
-          <div className="relative flex min-h-screen flex-col overflow-hidden bg-[#050816] text-slate-100">
+          <div className="relative bg-[#050816] text-slate-100">
             <StarsCanvas />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(110,77,255,0.12),transparent_55%)]" />
             <div className="pointer-events-none absolute bottom-[-38%] left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-sky-500/15 blur-[160px]" />
 
-            <div className="relative z-10 flex min-h-screen flex-col">
-              {/* Splash on first visit */}
-              <InitialSplash minDuration={1100} oncePerSession message="Launching portfolio..." />
+            {/* Splash on first visit */}
+            <InitialSplash minDuration={1100} oncePerSession message="Launching portfolio..." />
 
-              {/* Site content */}
-              <main className="flex-1">{children}</main>
-            </div>
+            {/* Site content */}
+            {children}
           </div>
         </Providers>
       </body>

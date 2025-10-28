@@ -10,6 +10,7 @@ export type NavLink = { href: `#${string}`; label: string };
 const navLinks: NavLink[] = [
   { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
+  { href: "#highlights", label: "Highlights" },
   { href: "#skills", label: "Skills" },
   { href: "#experience", label: "Experience" },
   { href: "#certifications", label: "Certifications" },
@@ -25,8 +26,9 @@ declare global {
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [active, setActive] = useState<NavLink["href"]>("#about");
+  const [active, setActive] = useState<NavLink["href"]>("#home");
   const [headerH, setHeaderH] = useState(96); // sensible default
+  const [scrolled, setScrolled] = useState(false);
 
   const headerRef = useRef<HTMLElement | null>(null);
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -55,6 +57,14 @@ export default function Header() {
     };
   }, []);
 
+  // ---- Detect scroll to tighten the glassmorphism on move
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   // ---- Track active section using IntersectionObserver (robust vs. offsetTop)
   useEffect(() => {
     const ids = navLinks.map(({ href }) => href.slice(1));
@@ -65,11 +75,14 @@ export default function Header() {
     if (!sections.length) return;
 
     // Avoid flicker during programmatic scrolling
-    const lockUntil = 0;
+    const readLockUntil = () =>
+      (typeof window !== "undefined" && typeof window.__scrollLockUntil === "number"
+        ? window.__scrollLockUntil
+        : 0);
 
     const io = new IntersectionObserver(
       (entries) => {
-        if (Date.now() < lockUntil) return; // ignore while we scroll programmatically
+        if (Date.now() < readLockUntil()) return; // ignore while we scroll programmatically
 
         // Prefer the entry that is most visible and above the fold
         const onScreen = entries
@@ -125,13 +138,11 @@ export default function Header() {
     const el = document.getElementById(id);
     if (!el) return;
 
-    // Lock observer updates briefly to avoid mid-scroll flicker
-    window.__scrollLockUntil = Date.now() + 400;
-
     const top = el.getBoundingClientRect().top + window.scrollY - headerH - 4;
     window.scrollTo({ top, behavior: "smooth" });
 
     setActive(href); // immediate visual feedback
+    setIsOpen(false); // close mobile nav once a destination is chosen
 
     // Unlock (kept in closure for safety)
     setTimeout(() => {
@@ -165,12 +176,22 @@ export default function Header() {
   }, [isOpen]);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50">
+    <header
+      ref={headerRef}
+      className="fixed top-0 z-50 w-full transition-transform duration-300 will-change-transform"
+    >
       {/* Hairline gradient like a premium navbar */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
 
       {/* Glassy bar */}
-      <div className="border-b border-white/10 bg-[#050816]/80 shadow-[0_12px_30px_rgba(6,10,30,0.45)] backdrop-blur">
+      <div
+        className={[
+          "border-b border-white/10 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300",
+          scrolled
+            ? "border-white/15 bg-[#050816]/95 shadow-[0_20px_40px_rgba(5,8,22,0.6)] backdrop-blur-xl"
+            : "bg-[#050816]/65 shadow-[0_12px_30px_rgba(6,10,30,0.35)] backdrop-blur-lg",
+        ].join(" ")}
+      >
         <nav
           className="container mx-auto flex items-center justify-between px-6 py-3 md:py-4"
           aria-label="Primary"
@@ -236,5 +257,3 @@ export default function Header() {
 // 2) Optionally add `scroll-smooth` to <html> or body for native smooth scrolling.
 //    Since we handle smooth scrolling programmatically, this is optional.
 // 3) Make sure each target section id matches nav hrefs exactly.
-
-

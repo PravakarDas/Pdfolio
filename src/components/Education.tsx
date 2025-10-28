@@ -55,7 +55,7 @@ const educationItems: EducationItem[] = [
 
 export default function Education() {
   return (
-    <article className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.55)] backdrop-blur">
+    <article className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0f102b]/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.55)] backdrop-blur">
       <header className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-6">
         <div>
           <p className="text-xs uppercase tracking-[0.4em] text-slate-300/70">Education</p>

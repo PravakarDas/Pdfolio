@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden text-white"
+      className="relative overflow-hidden text-white scroll-mt-24 md:scroll-mt-28"
       aria-label="Intro section"
     >
       {/* Decorative glow (behind everything) */}

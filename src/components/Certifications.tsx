@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { BadgeCheck, ChevronDown, ChevronUp, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -175,7 +175,7 @@ export default function Certifications() {
   }, [isHorizontal, centerItem]);
 
   return (
-    <section id="certifications" className="scroll-mt-23 md:scroll-mt-25">
+    <section id="certifications" className="scroll-mt-24 md:scroll-mt-28">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -196,7 +196,7 @@ export default function Certifications() {
         {/* scroller / grid container */}
         <div
           ref={scrollerRef}
-          className="mt-0 overflow-x-auto overflow-y-visible md:overflow-visible pt-4 /* pl-0.5 removed */ pb-2 md:pb-0"
+          className="no-scrollbar mt-0 overflow-x-auto overflow-y-visible md:overflow-visible pt-4 /* pl-0.5 removed */ pb-2 md:pb-0"
         >
           <ul
   id="certs-list"

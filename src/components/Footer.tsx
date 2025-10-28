@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import BackToTop from './BackToTop';
@@ -30,11 +30,8 @@ export default function Footer() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE } },
   };
 
-  const linkClasses =
-    'group relative inline-flex items-center text-sm sm:text-base text-slate-300 transition hover:text-white';
-
   return (
-    <footer className="relative border-t border-white/10 bg-transparent py-10 text-white">
+    <footer className="relative border-t border-white/10 bg-transparent py-2 text-white">
       <motion.div
         className="container mx-auto px-6"
         variants={container}
@@ -42,11 +39,12 @@ export default function Footer() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        {/* Top row: socials + theme toggle */}
-        <div className="flex flex-col items-center gap-6">
+        {/* Ultra compact single row layout */}
+        <div className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:justify-between">
+          {/* Left: Social links */}
           <motion.ul
             variants={item}
-            className="flex items-center justify-center gap-8"
+            className="flex items-center gap-3"
             aria-label="Social links"
           >
             <li>
@@ -56,11 +54,11 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 title="GitHub"
-                whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
+                whileHover={{ y: reduce ? 0 : -1, scale: reduce ? 1 : 1.02 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className="inline-flex rounded-full text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-sky-400"
               >
-                <FaGithub size={28} />
+                <FaGithub size={16} />
               </motion.a>
             </li>
             <li>
@@ -70,11 +68,11 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 title="LinkedIn"
-                whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
+                whileHover={{ y: reduce ? 0 : -1, scale: reduce ? 1 : 1.02 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className="inline-flex rounded-full text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-sky-400"
               >
-                <FaLinkedin size={28} />
+                <FaLinkedin size={16} />
               </motion.a>
             </li>
             <li>
@@ -82,59 +80,45 @@ export default function Footer() {
                 href="mailto:hkumar1698.hk@gmail.com"
                 aria-label="Email"
                 title="Email"
-                whileHover={{ y: reduce ? 0 : -2, scale: reduce ? 1 : 1.04 }}
+                whileHover={{ y: reduce ? 0 : -1, scale: reduce ? 1 : 1.02 }}
                 whileTap={{ scale: reduce ? 1 : 0.98 }}
-                className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-sky-400"
+                className="inline-flex rounded-full text-slate-400 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-sky-400"
               >
-                <FaEnvelope size={28} />
+                <FaEnvelope size={16} />
               </motion.a>
             </li>
           </motion.ul>
 
+          {/* Center: Quick links */}
+          <motion.nav
+            variants={item}
+            className="flex items-center gap-3"
+            aria-label="Footer links"
+          >
+            {[
+              { label: 'Contact', href: '#contact' },
+              { label: 'Resume', href: '/Hemant_Kumar_Resume.pdf' },
+            ].map((l) => (
+              <a key={l.label} href={l.href} className="group relative inline-flex items-center text-xs text-slate-400 transition-colors duration-200 hover:text-white">
+                {l.label}
+                <span
+                  className="pointer-events-none absolute left-0 -bottom-0.5 h-px w-0 bg-gradient-to-r from-sky-300 via-indigo-400 to-indigo-500
+                             opacity-0 transition-all duration-300 ease-out
+                             group-hover:w-full group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+              </a>
+            ))}
+          </motion.nav>
+
+          {/* Right: Copyright */}
+          <motion.p
+            variants={item}
+            className="text-xs text-slate-500"
+          >
+            &copy; {new Date().getFullYear()}
+          </motion.p>
         </div>
-
-        {/* Link row with glowing underline */}
-        <motion.nav
-          variants={item}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
-          aria-label="Footer links"
-        >
-          {[
-            { label: 'Contact', href: '#contact' },
-            { label: 'Resume', href: '/Hemant_Kumar_Resume.pdf' },
-          ].map((l) => (
-            <a key={l.label} href={l.href} className={linkClasses}>
-              {l.label}
-              {/* underline */}
-              <span
-                className="pointer-events-none absolute left-0 -bottom-0.5 h-px w-0 bg-gradient-to-r from-sky-300 via-indigo-400 to-indigo-500
-                           opacity-0 blur-[0.5px] transition-all duration-300 ease-out
-                           group-hover:w-full group-hover:opacity-100"
-                aria-hidden="true"
-              />
-              {/* glow */}
-              <span
-                className="pointer-events-none absolute left-0 -bottom-0.5 h-[3px] w-0 rounded-full bg-sky-500/40
-                           opacity-0 blur-[4px] transition-all duration-300 ease-out
-                           group-hover:w-full group-hover:opacity-100"
-                aria-hidden="true"
-              />
-            </a>
-          ))}
-        </motion.nav>
-
-        {/* Divider + meta */}
-        <motion.div
-          variants={item}
-          className="mx-auto mt-6 h-px w-24 bg-white/10"
-          aria-hidden="true"
-        />
-        <motion.p
-          variants={item}
-          className="mt-3 text-center text-xs sm:text-sm text-slate-400"
-        >
-          &copy; {new Date().getFullYear()} Hemant Kumar - Built with passion, Next.js & Tailwind
-        </motion.p>
       </motion.div>
 
       {/* Floating Back to Top Button */}
@@ -142,12 +126,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-
-
-
-
-
-
-
-

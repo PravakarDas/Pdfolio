@@ -181,7 +181,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden py-20 text-white scroll-mt-16 md:scroll-mt-18"
+      className="relative overflow-hidden py-20 text-white scroll-mt-24 md:scroll-mt-28"
     >
       {/* glows behind everything */}
       <div className="pointer-events-none absolute -top-16 -left-24 h-56 w-56 rounded-full bg-white/10 blur-3xl -z-10" />
