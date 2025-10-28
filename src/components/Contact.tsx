@@ -1,9 +1,24 @@
 ﻿'use client';
 
 import emailjs from '@emailjs/browser';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { MessageSquare, Send, UserRound } from 'lucide-react';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
+
+const EarthCanvas = dynamic(() => import('./canvas/EarthCanvas'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full items-center justify-center">
+      <span className="canvas-loader" />
+    </div>
+  ),
+});
+
+const StarsCanvas = dynamic(() => import('./canvas/StarsCanvas'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -12,11 +27,11 @@ const RECEIVER_EMAIL = process.env.NEXT_PUBLIC_EMAILJS_RECEIVER;
 const RECEIVER_NAME =
   process.env.NEXT_PUBLIC_EMAILJS_RECEIVER_NAME?.trim() || 'there';
 
-interface FormFields {
+type FormFields = {
   name: string;
   email: string;
   message: string;
-}
+};
 
 type FormErrors = Partial<Record<keyof FormFields, string>>;
 
@@ -32,22 +47,27 @@ const initialForm: FormFields = {
 };
 
 const inputClasses =
-  'w-full rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-base text-slate-100 placeholder:text-slate-400 shadow-[0_1px_0_rgba(255,255,255,0.08)] transition focus:border-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400/40 disabled:cursor-not-allowed disabled:border-white/5 disabled:text-slate-500';
+  'w-full rounded-xl border border-[#1f1d47] bg-[#0f102b]/80 px-4 py-3 text-base text-slate-100 placeholder:text-slate-400 transition focus:border-[#6e4dff] focus:outline-none focus:ring-2 focus:ring-[#6e4dff]/40 disabled:cursor-not-allowed disabled:border-[#1f1d47]/60 disabled:text-slate-500';
 
 const errorClasses =
   'border-rose-500 focus:border-rose-500 focus:ring-rose-500/30 disabled:border-rose-500/60';
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 0.65, 0.4, 0.95] } },
-};
-
-const formVariants = {
-  hidden: { opacity: 0, y: 28 },
+const cardVariants = {
+  hidden: { opacity: 0, x: -40 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: [0.16, 0.84, 0.44, 1], delay: 0.1 },
+    x: 0,
+    transition: { duration: 0.65, ease: [0.16, 0.84, 0.44, 1] },
+  },
+};
+
+const earthVariants = {
+  hidden: { opacity: 0, x: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.22, 0.65, 0.4, 0.95], delay: 0.15 },
   },
 };
 
@@ -154,148 +174,145 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-slate-950 py-20 scroll-mt-28 md:scroll-mt-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.12),transparent_60%)]" />
+    <section id="contact" className="relative overflow-hidden bg-[#050816] py-20 scroll-mt-28 md:scroll-mt-32">
+      <StarsCanvas />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(110,77,255,0.15),transparent_55%)]" />
       <div className="pointer-events-none absolute bottom-[-40%] left-1/2 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-sky-500/20 blur-[140px]" />
 
-      <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-6 lg:flex-row lg:items-stretch lg:gap-16 lg:px-8">
         <motion.div
-          className="max-w-2xl space-y-6"
+          className="relative z-10 flex flex-1 flex-col gap-8 rounded-3xl border border-[#1f1d47] bg-[#0f102b]/90 p-8 shadow-[0_30px_80px_rgba(5,6,22,0.65)] backdrop-blur"
+          variants={cardVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.4 }}
-          variants={sectionVariants}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-500/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-sky-200">
-            Let&apos;s collaborate
-          </span>
-          <h2 className="font-display text-4xl font-semibold tracking-tight text-white md:text-5xl">
-            Bring your next idea to life
-          </h2>
-          <p className="max-w-xl text-base leading-relaxed text-slate-300">
-            Share a few details about your project or the challenge you&apos;re trying to solve. I read every message and typically respond within one business day.
-          </p>
-          <ul className="grid gap-4 text-sm text-slate-300 sm:grid-cols-2">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#b4a4ff]">
+              Get in touch
+            </p>
+            <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
+              Contact.
+            </h2>
+          </div>
+
+          <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className="text-sm font-medium text-slate-200">
+                Your name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                placeholder="Jane Doe"
+                value={form.name}
+                onChange={handleChange}
+                disabled={loading}
+                className={`${inputClasses} ${errors.name ? errorClasses : ''}`}
+              />
+              {errors.name ? (
+                <p className="text-sm text-rose-400" role="alert">
+                  {errors.name}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className="text-sm font-medium text-slate-200">
+                Your email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@gmail.com"
+                value={form.email}
+                onChange={handleChange}
+                disabled={loading}
+                className={`${inputClasses} ${errors.email ? errorClasses : ''}`}
+              />
+              {errors.email ? (
+                <p className="text-sm text-rose-400" role="alert">
+                  {errors.email}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className="text-sm font-medium text-slate-200">
+                Your message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={7}
+                placeholder="Hello there!"
+                value={form.message}
+                onChange={handleChange}
+                disabled={loading}
+                className={`${inputClasses} ${errors.message ? errorClasses : ''} resize-none leading-relaxed`}
+              />
+              {errors.message ? (
+                <p className="text-sm text-rose-400" role="alert">
+                  {errors.message}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex items-center gap-2 rounded-xl bg-[#6e4dff] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[#8063ff] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#b4a4ff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f102b] disabled:cursor-not-allowed disabled:bg-[#6e4dff]/60"
+              >
+                <Send className={`h-5 w-5 transition ${loading ? 'animate-pulse' : ''}`} />
+                {loading ? 'Sending...' : 'Send message'}
+              </button>
+
+              <div className="text-sm text-slate-300" role="status" aria-live="polite">
+                {status.type === 'success' ? (
+                  <span className="text-emerald-400">{status.message}</span>
+                ) : null}
+                {status.type === 'error' ? (
+                  <span className="text-rose-400">{status.message}</span>
+                ) : null}
+                {status.type === 'idle' && !loading ? (
+                  <span>I&apos;ll reply within 24 hours.</span>
+                ) : null}
+              </div>
+            </div>
+          </form>
+
+          <ul className="grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
             <li className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
               <UserRound className="h-5 w-5 text-sky-300" aria-hidden="true" />
-              <div>
-                <p className="font-medium text-slate-100">Direct inbox</p>
-                <p className="text-slate-400">Everything lands straight in my Gmail.</p>
-              </div>
+              <span>Messages go straight to my inbox.</span>
             </li>
             <li className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur">
               <MessageSquare className="h-5 w-5 text-sky-300" aria-hidden="true" />
-              <div>
-                <p className="font-medium text-slate-100">Thoughtful replies</p>
-                <p className="text-slate-400">Expect a tailored response, never a bot.</p>
-              </div>
+              <span>Expect a thoughtful reply, never a bot.</span>
             </li>
           </ul>
         </motion.div>
 
-        <motion.form
-          noValidate
-          onSubmit={handleSubmit}
-          className="relative z-10 grid gap-6 rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.6)] backdrop-blur lg:grid-cols-2 lg:gap-8"
+        <motion.div
+          className="relative flex flex-1 items-center justify-center"
+          variants={earthVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          variants={formVariants}
+          viewport={{ once: true, amount: 0.25 }}
         >
-          <div className="lg:col-span-1 lg:pr-6">
-            <label htmlFor="name" className="mb-2 block text-sm font-medium text-slate-200">
-              Your name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              placeholder="Jane Doe"
-              value={form.name}
-              onChange={handleChange}
-              disabled={loading}
-              className={`${inputClasses} ${errors.name ? errorClasses : ''}`}
-            />
-            {errors.name ? (
-              <p className="mt-2 text-sm text-rose-400" role="alert">
-                {errors.name}
-              </p>
-            ) : null}
-          </div>
-
-          <div className="lg:col-span-1 lg:pl-6">
-            <label htmlFor="email" className="mb-2 block text-sm font-medium text-slate-200">
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              placeholder="you@gmail.com"
-              value={form.email}
-              onChange={handleChange}
-              disabled={loading}
-              className={`${inputClasses} ${errors.email ? errorClasses : ''}`}
-            />
-            {errors.email ? (
-              <p className="mt-2 text-sm text-rose-400" role="alert">
-                {errors.email}
-              </p>
-            ) : null}
-          </div>
-
-          <div className="lg:col-span-2">
-            <label htmlFor="message" className="mb-2 block text-sm font-medium text-slate-200">
-              Project details
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={6}
-              placeholder="Tell me about your goals, timeline, and what kind of help you need."
-              value={form.message}
-              onChange={handleChange}
-              disabled={loading}
-              className={`${inputClasses} ${errors.message ? errorClasses : ''} resize-none leading-relaxed`}
-            />
-            {errors.message ? (
-              <p className="mt-2 text-sm text-rose-400" role="alert">
-                {errors.message}
-              </p>
-            ) : null}
-          </div>
-
-          <div className="lg:col-span-2 flex flex-wrap items-center gap-4">
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-flex items-center gap-2 rounded-2xl bg-sky-500 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-slate-950 transition hover:bg-sky-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:cursor-not-allowed disabled:bg-sky-500/60"
-            >
-              <Send className={`h-5 w-5 transition ${loading ? 'animate-pulse' : ''}`} />
-              {loading ? 'Sending...' : 'Send message'}
-            </button>
-
-            <div className="text-sm text-slate-300" role="status" aria-live="polite">
-              {status.type === 'success' ? (
-                <span className="text-emerald-400">{status.message}</span>
-              ) : null}
-              {status.type === 'error' ? (
-                <span className="text-rose-400">{status.message}</span>
-              ) : null}
-              {status.type === 'idle' && !loading ? (
-                <span>I&apos;ll reply within 24 hours.</span>
-              ) : null}
+          <div className="relative h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px]">
+            <div className="absolute inset-0 rounded-[2.75rem] bg-gradient-to-br from-sky-500/30 via-transparent to-indigo-500/40 blur-3xl" aria-hidden="true" />
+            <div className="relative h-full w-full overflow-hidden rounded-[2.75rem] border border-white/10 bg-[#090325]/70 shadow-[0_30px_80px_rgba(12,18,31,0.8)]">
+              <EarthCanvas />
             </div>
           </div>
-        </motion.form>
+        </motion.div>
       </div>
     </section>
   );
 }
-
-
-
-
-
