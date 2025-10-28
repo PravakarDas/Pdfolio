@@ -306,10 +306,7 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.25 }}
         >
           <div className="relative h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px]">
-            <div className="absolute inset-0 rounded-[2.75rem] bg-gradient-to-br from-sky-500/30 via-transparent to-indigo-500/40 blur-3xl" aria-hidden="true" />
-            <div className="relative h-full w-full overflow-hidden rounded-[2.75rem] border border-white/10 bg-[#090325]/70 shadow-[0_30px_80px_rgba(12,18,31,0.8)]">
-              <EarthCanvas />
-            </div>
+            <EarthCanvas />
           </div>
         </motion.div>
       </div>
