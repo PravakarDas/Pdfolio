@@ -14,8 +14,8 @@ type EducationItem = {
   program: string;
   period: string;
   location: string;
-  summary: string;
-  highlights: Highlight[];
+  summary?: string;
+  highlights?: Highlight[];
 };
 
 const toneClasses: Record<HighlightTone, string> = {
@@ -24,32 +24,33 @@ const toneClasses: Record<HighlightTone, string> = {
   amber: 'bg-amber-500/15 text-amber-100 ring-amber-400/30',
 };
 
+// ⬇️ Updated to match your academic journey
 const educationItems: EducationItem[] = [
   {
-    school: 'Langara College',
-    program: 'Post-Degree Diploma, Applied Science for Cloud and Software Development',
-    period: '2023 - 2025 (expected)',
-    location: 'Vancouver, Canada',
+    school: 'Brac University',
+    program: 'Bachelor of Science in Computer Science',
+    period: '2021 – 2025',
+    location: 'Dhaka, Bangladesh',
     summary:
-      'Hands-on focus on building resilient cloud native workloads across Google Cloud and AWS with SRE, automation, and DevOps practices baked in.',
+      'Concentration in Machine Learning and Software Engineering with a strong focus on applied computer science principles.',
     highlights: [
-      { label: "Dean's list (Fall 2024)", tone: 'sky' },
-      { label: 'Safe Milo capstone winner', tone: 'violet' },
-      { label: 'GCP Professional Cloud Architect', tone: 'amber' },
+      { label: 'Machine Learning', tone: 'sky' },
+      { label: 'Software Engineering', tone: 'violet' },
     ],
   },
   {
-    school: 'Kalinga University',
-    program: 'Bachelor of Technology, Computer Science and Engineering',
-    period: '2017 - 2021',
-    location: 'Raipur, India',
-    summary:
-      'Graduated with distinction while specialising in distributed systems, database design, and full stack development. Mentored peer hackathon teams and student developer clubs.',
-    highlights: [
-      { label: 'CGPA 9.1 / 10', tone: 'sky' },
-      { label: 'Smart Exam Proctor final project', tone: 'violet' },
-      { label: 'Google DSC lead assistant', tone: 'amber' },
-    ],
+    school: 'Islamia Degree College',
+    program: 'Higher Secondary Certificate (Science)',
+    period: '2019 – 2020',
+    location: 'Chattogram, Bangladesh',
+    // No extra summary shown on the screenshot; keeping this concise.
+    highlights: [{ label: 'Science Stream', tone: 'amber' }],
+  },
+  {
+    school: 'Hazi Mohammad Mohsin Government High School',
+    program: 'Secondary School Certificate',
+    period: '2012 – 2018',
+    location: 'Chattogram, Bangladesh',
   },
 ];
 
@@ -67,9 +68,14 @@ export default function Education() {
       </header>
 
       <ol className="relative mt-6 space-y-8 border-l border-white/10 pl-6">
-        <span className="absolute left-3 top-0 h-full w-px bg-gradient-to-b from-sky-400/60 via-white/10 to-transparent" aria-hidden />
-        {educationItems.map(item => (
-          <li key={item.school} className="relative pl-6">
+        {/* timeline glow (stays inside article due to overflow-hidden) */}
+        <span
+          className="absolute left-3 top-0 h-full w-px bg-gradient-to-b from-sky-400/60 via-white/10 to-transparent"
+          aria-hidden
+        />
+        {educationItems.map((item) => (
+          <li key={`${item.school}-${item.period}`} className="relative pl-6">
+            {/* marker (clipped by article overflow) */}
             <span className="absolute left-[-39px] top-2 flex h-8 w-8 items-center justify-center rounded-full bg-slate-900/80 ring-2 ring-sky-400/40">
               <GraduationCap className="h-4 w-4 text-sky-300" aria-hidden />
             </span>
@@ -87,31 +93,29 @@ export default function Education() {
             </div>
 
             <p className="mt-3 text-base font-semibold text-white">{item.program}</p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-200/80">{item.summary}</p>
 
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {item.highlights.map(highlight => (
-                <li
-                  key={highlight.label}
-                  className={[
-                    'inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium ring-1 transition-colors',
-                    highlight.tone ? toneClasses[highlight.tone] : 'bg-white/10 text-white ring-white/20',
-                  ].join(' ')}
-                >
-                  {highlight.label}
-                </li>
-              ))}
-            </ul>
+            {item.summary ? (
+              <p className="mt-2 text-sm leading-relaxed text-slate-200/80">{item.summary}</p>
+            ) : null}
+
+            {item.highlights && item.highlights.length > 0 ? (
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {item.highlights.map((highlight) => (
+                  <li
+                    key={highlight.label}
+                    className={[
+                      'inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium ring-1 transition-colors',
+                      highlight.tone ? toneClasses[highlight.tone] : 'bg-white/10 text-white ring-white/20',
+                    ].join(' ')}
+                  >
+                    {highlight.label}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </li>
         ))}
       </ol>
-
-      <div className="mt-8 rounded-2xl border border-sky-400/20 bg-sky-500/10 px-5 py-4 text-sm text-sky-100/90 shadow-inner">
-        <p>
-          Outside the classroom I invest in Google Cloud, Terraform, and container orchestration labs - distilling
-          that learning into study groups, brown bag sessions, and clear documentation so teams can move faster.
-        </p>
-      </div>
     </article>
   );
 }

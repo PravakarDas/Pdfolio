@@ -38,21 +38,21 @@ const SKILLS: Skill[] = [
   { name: 'Express.js', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg', alt: 'Express.js logo', category: 'Backend' },
   { name: 'Django', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg', alt: 'Django logo', category: 'Backend' },
   { name: 'MongoDB', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg', alt: 'MongoDB logo', category: 'Backend' },
-  { name: 'PostgreSQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', alt: 'PostgreSQL logo', category: 'Backend' },
+  // { name: 'PostgreSQL', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg', alt: 'PostgreSQL logo', category: 'Backend' },
   { name: 'Firebase', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg', alt: 'Firebase logo', category: 'Backend' },
 
   // Design
   { name: 'Figma', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg', alt: 'Figma logo', category: 'Design' },
 
   // Cloud & DevOps
-  { name: 'AWS', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', alt: 'AWS logo', category: 'Cloud & DevOps' },
+  // { name: 'AWS', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg', alt: 'AWS logo', category: 'Cloud & DevOps' },
   { name: 'Google Cloud', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg', alt: 'Google Cloud logo', category: 'Cloud & DevOps' },
   { name: 'Vercel', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg', alt: 'Vercel logo', category: 'Cloud & DevOps' },
   { name: 'Linux', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg', alt: 'Linux logo', category: 'Cloud & DevOps' },
 
   // Others
   { name: 'GitHub', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', alt: 'GitHub logo', category: 'Others' },
-  { name: 'Jira', src: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jira/jira-original.svg', alt: 'Jira logo', category: 'Others' },
+  
 ];
 
 const TABS: Array<'All' | Category> = [
@@ -138,8 +138,6 @@ export default function Skills() {
           </motion.div>
         ))}
       </motion.div>
-
-      <p className="text-sm text-slate-300">Always learning — this list will keep growing!</p>
     </motion.section>
   );
 }

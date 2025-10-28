@@ -49,7 +49,7 @@ export default function Footer() {
           >
             <li>
               <motion.a
-                href="https://github.com/Hkumar145"
+                href="https://github.com/PravakarDas"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -63,7 +63,7 @@ export default function Footer() {
             </li>
             <li>
               <motion.a
-                href="https://www.linkedin.com/in/hemant-kumar-bb99171aa"
+                href="https://www.linkedin.com/in/pravakarda"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -77,7 +77,7 @@ export default function Footer() {
             </li>
             <li>
               <motion.a
-                href="mailto:hkumar1698.hk@gmail.com"
+                href="mailto:pravakar459@gmail.com"
                 aria-label="Email"
                 title="Email"
                 whileHover={{ y: reduce ? 0 : -1, scale: reduce ? 1 : 1.02 }}
@@ -112,12 +112,12 @@ export default function Footer() {
           </motion.nav>
 
           {/* Right: Copyright */}
-          <motion.p
+          {/* <motion.p
             variants={item}
             className="text-xs text-slate-500"
           >
             &copy; {new Date().getFullYear()}
-          </motion.p>
+          </motion.p> */}
         </div>
       </motion.div>
 

@@ -13,39 +13,43 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden text-white scroll-mt-24 md:scroll-mt-28"
+      className="relative overflow-hidden overflow-x-hidden text-white scroll-mt-24 md:scroll-mt-28"
       aria-label="Intro section"
     >
-      {/* Decorative glow (behind everything) */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl -z-10" />
-      <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-indigo-400/10 blur-3xl -z-10" />
+      {/* ---- DECORATIVE LAYER (no overflow) ---- */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        {/* Glows */}
+        <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-indigo-400/10 blur-3xl" />
 
-      {/* Meteors layer (CSS-based, disabled if reduced motion) */}
-      {!reduceMotion && (
-        <>
-          <span
-            aria-hidden
-            className="absolute -top-10 -left-20 h-0.5 w-32 opacity-70"
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0))',
-              filter: 'blur(0.2px)',
-              animation: 'meteor 7.5s linear infinite',
-            }}
-          />
-          <span
-            aria-hidden
-            className="absolute top-[15%] left-[30%] h-0.5 w-40 opacity-70"
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0))',
-              filter: 'blur(0.3px)',
-              animation: 'meteor 9s linear infinite',
-              animationDelay: '2s',
-            }}
-          />
-        </>
-      )}
+        {/* Meteors (disabled if reduced motion) */}
+        {!reduceMotion && (
+          <>
+            <span
+              aria-hidden
+              className="absolute -top-10 -left-20 h-0.5 w-32 opacity-70"
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0))',
+                filter: 'blur(0.2px)',
+                animation: 'meteor 7.5s linear infinite',
+              }}
+            />
+            <span
+              aria-hidden
+              className="absolute top-[15%] left-[30%] h-0.5 w-40 opacity-70"
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0))',
+                filter: 'blur(0.3px)',
+                animation: 'meteor 9s linear infinite',
+                animationDelay: '2s',
+              }}
+            />
+          </>
+        )}
+      </div>
+      {/* ---- /DECORATIVE LAYER ---- */}
 
       <div className="container mx-auto px-6 py-20 md:py-28 relative">
         <div className="flex flex-col items-center justify-between gap-12 md:flex-row">
@@ -57,18 +61,18 @@ export default function Hero() {
             className="md:w-1/2 text-center md:text-left"
           >
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-              Hi, I&apos;m Hemant Kumar
+              Hi, I&apos;m Pravakar Das!
             </h1>
 
             <h2 className="text-2xl md:text-xl font-bold mb-4">
-              Full Stack Developer &amp; Cloud Engineer
+              Full Stack Developer
             </h2>
 
-            {/* MOBILE-ONLY AVATAR (appears above the description) */}
+            {/* MOBILE-ONLY AVATAR */}
             <div className="md:hidden mb-6 flex justify-center">
               <Image
                 src="/profile.png"
-                alt="Portrait of Hemant Kumar"
+                alt="Portrait of Pravakar Das"
                 width={220}
                 height={220}
                 priority
@@ -128,28 +132,27 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Image Column with orbital rings + sparkles (DESKTOP ONLY) */}
+          {/* IMAGE COLUMN — FIXED FOR SCROLLBAR ISSUE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-            className="hidden md:flex md:w-1/2 justify-center"
+            className="hidden md:flex md:w-1/2 justify-center max-w-full"
           >
-            <div className="relative">
+            {/* ✅ Everything is clipped inside this wrapper */}
+            <div className="relative max-w-full rounded-full overflow-hidden">
               {/* Halo */}
-              <div className="absolute -inset-4 -z-10 rounded-full bg-white/10 blur-2xl" />
+              <div className="absolute inset-2 -z-10 rounded-full bg-white/10 blur-2xl pointer-events-none" />
 
-              {/* Rings + sparkles behind avatar */}
-              <div className="absolute inset-0 -z-10 flex items-center justify-center">
-                {/* Outer ring */}
+              {/* Rings + Sparkles (Clipped) */}
+              <div className="absolute inset-0 -z-10 flex items-center justify-center overflow-hidden pointer-events-none">
+                {/* Outer Ring */}
                 <motion.svg
-                  width="380"
-                  height="380"
                   viewBox="0 0 380 380"
                   initial={false}
                   animate={reduceMotion ? {} : { rotate: 360 }}
                   transition={reduceMotion ? {} : { duration: 60, ease: 'linear', repeat: Infinity }}
-                  className="opacity-50"
+                  className="opacity-50 w-[min(90vw,380px)] h-[min(90vw,380px)]"
                   aria-hidden
                 >
                   <circle
@@ -164,15 +167,13 @@ export default function Hero() {
                   />
                 </motion.svg>
 
-                {/* Inner ring (counter-rotating) */}
+                {/* Inner Ring */}
                 <motion.svg
-                  width="300"
-                  height="300"
                   viewBox="0 0 300 300"
                   initial={false}
                   animate={reduceMotion ? {} : { rotate: -360 }}
                   transition={reduceMotion ? {} : { duration: 50, ease: 'linear', repeat: Infinity }}
-                  className="absolute opacity-60"
+                  className="absolute opacity-60 w-[min(78vw,300px)] h-[min(78vw,300px)]"
                   aria-hidden
                 >
                   <circle
@@ -187,42 +188,25 @@ export default function Hero() {
                   />
                 </motion.svg>
 
-                {/* ✨ Sparkles drifting around the rings */}
                 <SparkleOrbits reduceMotion={!!reduceMotion} />
               </div>
 
-              <Image
-                src="/profile.png"
-                alt="Portrait of Hemant Kumar"
-                width={320}
-                height={320}
-                priority
-                sizes="(max-width: 768px) 240px, 320px"
-                className="rounded-full shadow-xl transition-transform duration-300 hover:scale-105"
-              />
+              {/* Image (scales safely inside clip) */}
+              <div className="group rounded-full overflow-hidden">
+                <Image
+                  src="/profile.png"
+                  alt="Portrait of Hemant Kumar"
+                  width={320}
+                  height={320}
+                  priority
+                  sizes="(max-width: 768px) 240px, 320px"
+                  className="rounded-full shadow-xl transition-transform duration-300 group-hover:scale-105 max-w-full h-auto"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* CSS keyframes for meteors */}
-      {!reduceMotion && (
-        <style jsx>{`
-          @keyframes meteor {
-            0% {
-              transform: translate3d(-10%, -20%, 0) rotate(45deg);
-              opacity: 0;
-            }
-            10% {
-              opacity: 1;
-            }
-            100% {
-              transform: translate3d(110%, 120%, 0) rotate(45deg);
-              opacity: 0;
-            }
-          }
-        `}</style>
-      )}
     </section>
   );
 }
