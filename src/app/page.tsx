@@ -1,7 +1,6 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Highlights from '../components/Highlights';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -18,7 +17,6 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <About />
-        <Highlights />
         <section className="py-16">
           <div className="container mx-auto flex flex-col gap-16 px-6">
             <Skills />
