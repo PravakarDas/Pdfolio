@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 import Certifications from '../components/Certifications';
 import Skills from '../components/Skills';
 import Experience from '../components/Experience';
+import Education from '../components/Education';
 import React from 'react';
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
           <div className="container mx-auto flex flex-col gap-16 px-6">
             <Skills />
             <Experience />
+            <Education />
             <Certifications />
           </div>
         </section>

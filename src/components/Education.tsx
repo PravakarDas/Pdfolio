@@ -56,26 +56,21 @@ const educationItems: EducationItem[] = [
 
 export default function Education() {
   return (
-    <article className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#0f102b]/80 p-8 shadow-[0_20px_60px_rgba(15,23,42,0.55)] backdrop-blur">
-      <header className="flex flex-wrap items-start justify-between gap-4 border-b border-white/10 pb-6">
-        <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-slate-300/70">Education</p>
-          <h2 className="mt-2 text-2xl font-semibold text-white md:text-3xl">Academic Journey</h2>
-        </div>
-        <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900/70 text-sky-300 ring-1 ring-sky-500/30">
-          <GraduationCap className="h-6 w-6" aria-hidden />
-        </span>
+    <article className="scroll-mt-24 space-y-6 rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur">
+      <header className="flex items-center gap-2 border-b border-white/10 pb-3 text-2xl font-bold text-white">
+        <GraduationCap className="h-6 w-6 text-sky-300" />
+        Education
       </header>
 
-      <ol className="relative mt-6 space-y-8 border-l border-white/10 pl-6">
-        {/* timeline glow (stays inside article due to overflow-hidden) */}
+      <ol className="relative space-y-8 border-l border-white/10 pl-6">
+        {/* timeline glow */}
         <span
           className="absolute left-3 top-0 h-full w-px bg-gradient-to-b from-sky-400/60 via-white/10 to-transparent"
           aria-hidden
         />
         {educationItems.map((item) => (
           <li key={`${item.school}-${item.period}`} className="relative pl-6">
-            {/* marker (clipped by article overflow) */}
+            {/* marker */}
             <span className="absolute left-[-39px] top-2 flex h-8 w-8 items-center justify-center rounded-full bg-slate-900/80 ring-2 ring-sky-400/40">
               <GraduationCap className="h-4 w-4 text-sky-300" aria-hidden />
             </span>

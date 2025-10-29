@@ -9,7 +9,7 @@ const projects: StarryProject[] = [
       "Essential Tools (Flask) is a modern, local-first PDF utility suite with a glassmorphic UI. Merge, split, compress, convert, sign, and secure PDFs via a responsive web UI and REST API. Designed for elegant UX, offline-first processing, and optional system-tool integration.",
     link: "https://essential-tools-7iuo.onrender.com/",
     github: "https://github.com/PravakarDas/Essential_Tools",
-    image: "/projects/essential-tools.png", // replace with your actual screenshot
+    image: "/projects/essential-tools.jpg", // replace with your actual screenshot
     skills: [
       "Flask",
       "Python",
