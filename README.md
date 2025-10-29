@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pdfolio
+**Full‑Stack Developer Portfolio & Resume Website**  
+By **Pravakar Das**
 
-## Getting Started
+---
 
-First, run the development server:
+## 📘 Overview
+Pdfolio is a sleek, responsive web portfolio and online resume built to showcase professional projects, skills, and achievements. Designed with a focus on clarity and minimalism, it provides a polished introduction to my work and experience as a developer.
+
+---
+
+## ✨ Features
+- Clean and intuitive layout
+- Responsive across all devices
+- Downloadable resume
+- Interactive project showcase with live links
+- Optimized for performance and readability
+- Deployed via Vercel for reliability and speed
+
+---
+
+## 🛠️ Technologies Used
+- **Framework:** Next.js (React, TypeScript)
+- **Styling:** Tailwind CSS
+- **Deployment:** Vercel
+- **Version Control:** Git & GitHub
+
+---
+
+## 🚀 Getting Started
+To set up the project locally:
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd pdfolio
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, visit **http://localhost:3000** in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To build for production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🧭 Project Structure
+```
+pdfolio/
+├── components/       # Reusable UI components
+├── pages/            # Next.js pages (routes)
+├── public/           # Static assets (images, icons, screenshots)
+├── styles/           # Global and component styles
+└── package.json      # Dependencies and scripts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🖼️ Screenshots
 
-## Deploy on Vercel
+| | | |
+|---|---|---|
+| ![Screenshot 1](public/Screenshots/Screenshot%202025-10-29%20230220.png) | ![Screenshot 2](public/Screenshots/Screenshot%202025-10-29%20230233.png) | ![Screenshot 3](public/Screenshots/Screenshot%202025-10-29%20230252.png) |
+| ![Screenshot 4](public/Screenshots/Screenshot%202025-10-29%20230306.png) | ![Screenshot 5](public/Screenshots/Screenshot%202025-10-29%20230326.png) | ![Screenshot 6](public/Screenshots/Screenshot%202025-10-29%20230341.png) |
+| ![Screenshot 7](public/Screenshots/Screenshot%202025-10-29%20230357.png) | | |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 Deployment
+Hosted on **[Vercel](https://vercel.com/)** — enabling automatic deployment, continuous integration, and lightning‑fast global delivery.
+
+Live Site: **[https://pdfolio-rho.vercel.app](https://pdfolio-rho.vercel.app)**
+
+---
+
+## 📄 License
+This project is open-source under the [MIT License](LICENSE).
+
+---
+
+## 📬 Contact
+- **Email:** pravakar459@gmail.com  
+- **Location:** Chattogram, Bangladesh  
+- **Portfolio:** [pdfolio-rho.vercel.app](https://pdfolio-rho.vercel.app)
+
+---
+
+*Crafted with ❤️ by Pravakar Das*
