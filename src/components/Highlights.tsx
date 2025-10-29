@@ -1,16 +1,16 @@
 'use client';
 
 import { Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 import Education from './Education';
 
-const headingVariants = {
+const headingVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: 'easeOut' },
+    transition: { duration: 0.55, ease: 'easeOut' as const },
   },
 };
 
@@ -42,11 +42,15 @@ export default function Highlights() {
             <Sparkles className="h-4 w-4 text-sky-300" aria-hidden />
             Highlights
           </span>
-          <h2 id="highlights-heading" className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl">
-            Recent wins & proud moments
+          <h2
+            id="highlights-heading"
+            className="mt-6 text-3xl font-extrabold tracking-tight md:text-4xl"
+          >
+            Recent wins &amp; proud moments
           </h2>
           <p className="mt-4 text-base text-white/80">
-            A snapshot of the achievements and milestones that keep me curious and focused on impact-driven software.
+            A snapshot of the achievements and milestones that keep me curious and focused on
+            impact-driven software.
           </p>
         </motion.div>
 
@@ -55,4 +59,3 @@ export default function Highlights() {
     </section>
   );
 }
-

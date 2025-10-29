@@ -249,11 +249,3 @@ export default function Header() {
     </header>
   );
 }
-
-// ---- Usage tips (ensure correct highlighting):
-// 1) Add a top scroll margin to each section equal to ~header height, e.g.:
-//    <section id="about" className="scroll-mt-28 md:scroll-mt-32"> ...
-//    Tailwind presets: scroll-mt-24 (~6rem), 28, 32, etc.
-// 2) Optionally add `scroll-smooth` to <html> or body for native smooth scrolling.
-//    Since we handle smooth scrolling programmatically, this is optional.
-// 3) Make sure each target section id matches nav hrefs exactly.
