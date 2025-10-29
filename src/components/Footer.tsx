@@ -97,7 +97,7 @@ export default function Footer() {
           >
             {[
               { label: 'Contact', href: '#contact' },
-              { label: 'Resume', href: '/Hemant_Kumar_Resume.pdf' },
+              { label: 'Resume', href: 'CV of Pravakar Das.pdf' },
             ].map((l) => (
               <a key={l.label} href={l.href} className="group relative inline-flex items-center text-xs text-slate-400 transition-colors duration-200 hover:text-white">
                 {l.label}
