@@ -77,7 +77,7 @@ function useMediaQuery(query: string) {
 }
 
 export default function Certifications() {
-  // ⬇️ Your four certificates
+  // ⬇️ Now includes your 5 certificates
   const certifications: Cert[] = [
     {
       title: 'Machine Learning Operations (MLOps) Track',
@@ -87,48 +87,49 @@ export default function Certifications() {
       badge: { label: 'Track', tone: 'blue' },
     },
     {
+      title: 'Machine Learning with Data Loss Prevention (DLP)',
+      image: '/certs/ml-dlp.jpg',
+      link: 'https://www.udemy.com/certificate/UC-d13b82ed-f82e-4800-93a2-fe464692fcf4/',
+      issuer: 'Udemy',
+      badge: { label: 'Course', tone: 'emerald' },
+    },
+    {
       title: 'HTML Certification',
       image: '/certs/html.jpg',
-      link: 'https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fude.my%2FUC-d15d07f7-904d-4d59-aafe-96b8a0b2d0b5&urlhash=7zWt&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BuipneHOURka98upehS5VEA%3D%3D',
+      link: 'https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fude.my%2FUC-d15d07f7-904d-4d59-aafe-96b8a0b2d0b5&urlhash=7zWt',
       issuer: 'Udemy',
     },
     {
       title: 'Office Administration',
       image: '/certs/ofc_admin.jpg',
-      link: 'https://www.linkedin.com/redir/redirect/?url=ude.my%2FUC-aaf49160-43a1-4cdb-b3eb-70345cab2ccd&urlhash=bRTV&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BuipneHOURka98upehS5VEA%3D%3D',
+      link: 'https://www.linkedin.com/redir/redirect/?url=ude.my%2FUC-aaf49160-43a1-4cdb-b3eb-70345cab2ccd&urlhash=bRTV',
       issuer: 'Udemy',
     },
     {
       title: 'CentOS Linux',
       image: '/certs/centos.jpg',
-      link: 'https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fude.my%2FUC-9925fc94-d998-4f05-b66b-f5f15b342c75&urlhash=2BtZ&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BuipneHOURka98upehS5VEA%3D%3D',
+      link: 'https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fude.my%2FUC-9925fc94-d998-4f05-b66b-f5f15b342c75&urlhash=2BtZ',
       issuer: 'Udemy',
     },
   ];
 
-  // layout flags (HOOKS ARE TOP-LEVEL)
+  // layout flags
   const isGridMd = useMediaQuery('(min-width: 768px) and (max-width: 1023.98px)');
   const isGridLgUp = useMediaQuery('(min-width: 1024px)');
-
-  const MD_DEFAULT = 4; // 2-2
-  const LG_DEFAULT = 6; // 3-3
-
-  // horizontal scroller state (mobile)
-  const scrollerRef = React.useRef<HTMLDivElement | null>(null);
-  const [pageCount, setPageCount] = React.useState(0);
-  const [pageIndex, setPageIndex] = React.useState(0);
-
-  // grid "view all" state (md & lg)
-  const [showAllGrid, setShowAllGrid] = React.useState(false);
-
   const isHorizontal = !isGridMd && !isGridLgUp;
 
-  // compute visible items per layout
+  const MD_DEFAULT = 4;
+  const LG_DEFAULT = 6;
+
+  const [showAllGrid, setShowAllGrid] = React.useState(false);
+  const [pageCount, setPageCount] = React.useState(0);
+  const [pageIndex, setPageIndex] = React.useState(0);
+  const scrollerRef = React.useRef<HTMLDivElement | null>(null);
+
   let visibleCerts = certifications;
   if (isGridMd) visibleCerts = showAllGrid ? certifications : certifications.slice(0, MD_DEFAULT);
   else if (isGridLgUp) visibleCerts = showAllGrid ? certifications : certifications.slice(0, LG_DEFAULT);
 
-  /** ---------- helpers to center items & compute active index ---------- */
   const centerItem = React.useCallback((i: number, behavior: ScrollBehavior = 'auto') => {
     const el = scrollerRef.current;
     if (!el) return;
@@ -156,47 +157,30 @@ export default function Certifications() {
 
   const goToPage = (i: number) => centerItem(i, 'smooth');
 
-  /** ---------- paging / resize listeners ---------- */
-  const recalcPages = React.useCallback(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    if (isHorizontal) {
-      setPageCount(visibleCerts.length);
-      setPageIndex(nearestCenteredIndex());
-    } else {
-      const count = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth));
-      setPageCount(count);
-      const idx = Math.round(el.scrollLeft / el.clientWidth);
-      setPageIndex(Math.min(count - 1, Math.max(0, idx)));
-    }
-  }, [isHorizontal, visibleCerts.length, nearestCenteredIndex]);
-
   React.useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
     let raf = 0;
+    const recalc = () => {
+      if (isHorizontal) {
+        setPageCount(certifications.length);
+        setPageIndex(nearestCenteredIndex());
+      }
+    };
     const onScroll = () => {
       if (raf) return;
-      raf = requestAnimationFrame(() => { recalcPages(); raf = 0; });
+      raf = requestAnimationFrame(() => { recalc(); raf = 0; });
     };
-    const ro = new ResizeObserver(() => recalcPages());
+    const ro = new ResizeObserver(() => recalc());
     ro.observe(el);
     el.addEventListener('scroll', onScroll, { passive: true });
-    recalcPages();
+    recalc();
     return () => {
       el.removeEventListener('scroll', onScroll);
       ro.disconnect();
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [recalcPages]);
-
-  // center the first certificate on initial mount (mobile horizontal)
-  React.useEffect(() => {
-    if (!isHorizontal) return;
-    const t0 = requestAnimationFrame(() => centerItem(0, 'auto'));
-    const t1 = setTimeout(() => centerItem(0, 'auto'), 250);
-    return () => { cancelAnimationFrame(t0); clearTimeout(t1); };
-  }, [isHorizontal, centerItem]);
+  }, [isHorizontal, nearestCenteredIndex, certifications.length]);
 
   return (
     <section id="certifications" className="scroll-mt-24 md:scroll-mt-28">
@@ -206,24 +190,17 @@ export default function Certifications() {
         transition={{ duration: 0.7, ease: 'easeInOut' }}
         viewport={{ once: true, amount: 0.2 }}
         className="relative mt-10 rounded-2xl border border-white/10 bg-[#0f102b]/80 p-6 text-slate-100 shadow-[0_20px_45px_rgba(6,10,30,0.45)] backdrop-blur"
-        aria-labelledby="certs-heading"
       >
-        <h3 id="certs-heading" className="flex items-center gap-2 border-b border-white/10 pb-3 text-2xl font-bold text-white">
-          <BadgeCheck className="h-6 w-6 text-sky-300" aria-hidden="true" />
+        <h3 className="flex items-center gap-2 border-b border-white/10 pb-3 text-2xl font-bold text-white">
+          <BadgeCheck className="h-6 w-6 text-sky-300" />
           Certifications
         </h3>
 
-        {/* mobile edge fades */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-20 left-0 z-0 w-10 bg-gradient-to-r from-[#0f102b] to-transparent md:hidden" />
-        <div aria-hidden className="pointer-events-none absolute inset-y-20 right-0 z-0 w-10 bg-gradient-to-l from-[#0f102b] to-transparent md:hidden" />
-
-        {/* scroller / grid container */}
         <div
           ref={scrollerRef}
-          className="no-scrollbar mt-0 overflow-x-auto overflow-y-visible md:overflow-visible pt-4 pb-2 md:pb-0"
+          className="no-scrollbar mt-4 overflow-x-auto overflow-y-visible md:overflow-visible pb-2 md:pb-0"
         >
           <ul
-            id="certs-list"
             className="
               flex w-max snap-x snap-mandatory gap-4 pt-2
               pl-[3.2vw] pr-[2vw]
@@ -232,7 +209,6 @@ export default function Certifications() {
               md:grid md:w-auto md:grid-cols-2 md:gap-4
               lg:grid-cols-3
             "
-            role="list"
           >
             {visibleCerts.map((cert, index) => {
               const theme = getIssuerTheme(cert.issuer);
@@ -242,27 +218,22 @@ export default function Certifications() {
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Open certificate: ${cert.title}`}
-                    className="
-                      group relative block min-w-[325px] max-w-[325px] sm:min-w-[350px] sm:max-w-[350px]
-                      md:min-w-0 md:max-w-none flex-shrink-0 rounded-xl
-                      border border-white/10 bg-[#0f102b]/70 p-4 text-slate-100 shadow-[0_16px_40px_rgba(6,10,30,0.45)] transition
-                      hover:border-sky-400/40 hover:shadow-[0_18px_45px_rgba(45,170,255,0.25)] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400
-                    "
-                    whileHover={{ y: -4, scale: 1.03, transition: { duration: 0.22 } }}
+                    className="group relative block min-w-[325px] max-w-[325px] sm:min-w-[350px] sm:max-w-[350px]
+                      md:min-w-0 md:max-w-none flex-shrink-0 rounded-xl border border-white/10 bg-[#0f102b]/70 p-4
+                      text-slate-100 shadow-[0_16px_40px_rgba(6,10,30,0.45)] transition
+                      hover:border-sky-400/40 hover:shadow-[0_18px_45px_rgba(45,170,255,0.25)]
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    whileHover={{ y: -4, scale: 1.03 }}
                   >
-                    {/* Award/Track sticker */}
                     {cert.badge && (
                       <span
-                        aria-label={`${cert.badge.label} badge`}
-                        className={`pointer-events-none absolute -top-2 -left-2 z-[999] inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold shadow-md ring-1 ${toneClasses(cert.badge.tone)}`}
+                        className={`absolute -top-2 -left-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold shadow-md ring-1 ${toneClasses(cert.badge.tone)}`}
                       >
-                        <Award className="h-3.5 w-3.5" aria-hidden />
+                        <Award className="h-3.5 w-3.5" />
                         {cert.badge.label}
                       </span>
                     )}
 
-                    {/* Image */}
                     <div className="mb-3 rounded-lg border border-white/10 bg-white/5">
                       <div className="relative flex h-[200px] items-center justify-center overflow-hidden rounded-lg sm:h-[220px] md:h-[220px] lg:h-[260px]">
                         <Image
@@ -276,16 +247,10 @@ export default function Certifications() {
                       </div>
                     </div>
 
-                    {/* Footer: issuer + optional year */}
                     <div className="mt-2 flex items-center justify-between">
                       {cert.issuer && (
                         <span className={['inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ring-1', theme.issuerChip].join(' ')}>
-                          <span className="leading-none">{cert.issuer}</span>
-                        </span>
-                      )}
-                      {cert.year && (
-                        <span className={['ml-3 inline-flex items-center rounded-full px-2 py-1 text-[11px] font-semibold', theme.yearPill, 'ring-1 ring-white/10 shadow-sm'].join(' ')}>
-                          {cert.year}
+                          {cert.issuer}
                         </span>
                       )}
                     </div>
@@ -296,45 +261,20 @@ export default function Certifications() {
           </ul>
         </div>
 
-        {/* pagination dots — only on horizontal (mobile) */}
         {isHorizontal && pageCount > 1 && (
-          <nav className="mt-4 flex justify-center md:hidden" aria-label="Certification pages">
+          <nav className="mt-4 flex justify-center md:hidden">
             <ul className="flex items-center gap-2">
-              {Array.from({ length: pageCount }).map((_, i) => {
-                const active = i === pageIndex;
-                return (
-                  <li key={i}>
-                    <button
-                      type="button"
-                      onClick={() => goToPage(i)}
-                      aria-label={`Go to certificate ${i + 1} of ${pageCount}`}
-                      aria-current={active ? 'page' : undefined}
-                      className={`h-1.5 rounded-full transition-[width,background-color] duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${active ? 'w-5 bg-blue-600' : 'w-2.5 bg-slate-300'}`}
-                    />
-                  </li>
-                );
-              })}
+              {Array.from({ length: pageCount }).map((_, i) => (
+                <li key={i}>
+                  <button
+                    type="button"
+                    onClick={() => goToPage(i)}
+                    className={`h-1.5 rounded-full ${i === pageIndex ? 'w-5 bg-blue-600' : 'w-2.5 bg-slate-300'} transition-all duration-200`}
+                  />
+                </li>
+              ))}
             </ul>
           </nav>
-        )}
-
-        {/* View all — only on grid (md 2-2 or lg 3-3) */}
-        {((isGridMd && certifications.length > MD_DEFAULT) || (isGridLgUp && certifications.length > LG_DEFAULT)) && (
-          <div className="mt-6 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setShowAllGrid((s) => !s)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:border-sky-400/40 hover:bg-sky-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-              aria-expanded={showAllGrid}
-              aria-controls="certs-list"
-            >
-              {showAllGrid ? (
-                <>Show less <ChevronUp className="h-4 w-4" aria-hidden /></>
-              ) : (
-                <>View all ({certifications.length}) <ChevronDown className="h-4 w-4" aria-hidden /></>
-              )}
-            </button>
-          </div>
         )}
       </motion.div>
     </section>

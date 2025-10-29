@@ -3,84 +3,101 @@
 import StarryProjectGrid, { type StarryProject } from "@/components/StarryProjectGrid";
 
 const projects: StarryProject[] = [
-{
-    title: "Safe Milo - An Elderly Safety App",
+  {
+    title: "Essential_Tools",
     description:
-      "A React Native Expo Mobile Application to save elderly people from online scams.",
-    link: "https://safemilo.wmdd.ca/",
-    github: "https://github.com/Capstone-Cheems/safemilo-app",
-    image: "/safe-milo.png",
+      "Essential Tools (Flask) is a modern, local-first PDF utility suite with a glassmorphic UI. Merge, split, compress, convert, sign, and secure PDFs via a responsive web UI and REST API. Designed for elegant UX, offline-first processing, and optional system-tool integration.",
+    link: "https://essential-tools-7iuo.onrender.com/",
+    github: "https://github.com/PravakarDas/Essential_Tools",
+    image: "/projects/essential-tools.png", // replace with your actual screenshot
     skills: [
-      "React Native (Expo)",
-      "TypeScript",
-      "NestJS",
-      "PostgreSQL",
-      "Firebase",
-      "AWS",
-      "Call Control",
-      "VirusTotal",
-      "OpenAI",
-      "Jira",
-      "GitHub",
-      "ESLint",
+      "Flask",
+      "Python",
+      "REST API",
+      "PyPDF2",
+      "Pillow/img2pdf",
+      "HTML/CSS",
+      "JavaScript",
+      "Tailwind CSS",
+      "Docker",
+      "Render",
     ],
   },
   {
-    title: "Helpmet - A Site Safety Web App",
+    title: "Arena_Strike",
     description:
-      "A Site Safety app with features like injury reporting, heat maps, equipment checks & more.",
-    link: "https://helpmet.ca/",
-    github: "https://github.com/Hkumar145/Helpmet",
-    image: "/Helpmet.svg",
+      "3D cannon-defense game built with Python and OpenGL: defend the arena with bullets, bombs, and lasers. Features real-time 3D rendering, multiple enemy types and levels, dynamic camera modes, and optional hand-gesture controls using OpenCV + MediaPipe.",
+    link: "https://github.com/PravakarDas/Arena_Strike",
+    github: "https://github.com/PravakarDas/Arena_Strike",
+    image: "/projects/arena-strike.jpg", // replace with your actual screenshot
     skills: [
+      "Python",
+      "OpenGL (PyOpenGL)",
+      "Pygame",
+      "OpenCV",
+      "MediaPipe",
+      "OOP",
+      "Game Loops",
+    ],
+  },
+  {
+    title: "Auris",
+    description:
+      "A modern, full-featured hotel booking platform (MERN) to explore rooms, book stays, manage reservations, and share reviews. Responsive animated UI, real-time updates, secure Firebase + JWT auth, and interactive maps for a smooth, personalized experience.",
+    link: "https://hotel-client-side.web.app/",
+    github: "https://github.com/PravakarDas/Auris",
+    image: "/projects/auris.jpg", // replace with your actual screenshot
+    skills: [
+      "MongoDB",
+      "Express",
       "React",
       "Node.js",
-      "Firebase",
-      "MongoDB",
-      "Chart.js",
+      "JWT",
+      "Firebase Auth",
       "Tailwind CSS",
-      "TomTom",
-      "Render",
-      "AWS",
-      "GitHub",
-      "ESLint",
-      "Prettier",
-      "Jira",
-
+      "Framer Motion",
+      "Axios",
+      "Interactive Map",
     ],
   },
   {
-    title: "Portfolio Website",
+    title: "Meghna_Oil_Agency",
     description:
-      "This is my very own portfolio, built with Next.js and Tailwind CSS.",
-    link: "https://www.hemantkmr.dev/",
-    github: "https://github.com/Hkumar145/hemant-portfolio",
-    image: "/portfolio.png",
-    skills: ["Next.js", "React.js", "Tailwind CSS", "JavaScript", "TypeScript", "Vercel", "GitHub", "ESLint", "Prettier","Framer Motion","Formspree","AWS"],
-  },
-  {
-    title: "Art Asta - An Art Marketplace",
-    description:
-      "A full-stack e-commerce platform for artists to showcase and sell their work.",
-    link: "https://artasta.netlify.app/",
-    github: "https://github.com/Hkumar145/ArtAsta",
-    image: "/artasta.jpg",
+      "Full-stack MERN e-commerce platform for an oil products business with separate client and admin frontends. Browse/filter products (cooking, motor, industrial oils) while the admin panel manages inventory and data via robust API endpoints.",
+    link: "https://github.com/PravakarDas/Meghna-Oil-Agency",
+    github: "https://github.com/PravakarDas/Meghna-Oil-Agency",
+    image: "/projects/meghna-oil-agency.jpg", // replace with your actual screenshot
     skills: [
-      "HTML",
-      "CSS",
-      "JavaScript",
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js",
+      "JWT",
+      "React Router",
+      "Tailwind CSS",
+      "Admin Dashboard",
       "REST APIs",
-      "GCP",
-      "Firebase",
-      "Bootstrap",
-      "Netlify",
-      "GitHub",
-      "Figma",
-      "ESLint",
-      "Prettier",
-      "Jira",
     ],
-  }
+  },
+  {
+    title: "TurfManagementSystem",
+    description:
+      "An ongoing MERN platform to streamline turf booking and administration with three roles: Client, Turf Manager, and Project Admin. Secure, role-based access with real-time updates and a responsive UI for bookings, schedules, and operations.",
+    link: "https://github.com/PravakarDas/TurfManagementSystem",
+    github: "https://github.com/PravakarDas/TurfManagementSystem",
+    image: "/projects/turf-management.jpg", // replace with your actual screenshot
+    skills: [
+      "MongoDB",
+      "Express",
+      "React",
+      "Node.js",
+      "JWT",
+      "Role-Based Access",
+      "Tailwind CSS",
+      "REST APIs",
+      "Real-time Updates",
+    ],
+  },
 ];
 
 export default function Projects() {
