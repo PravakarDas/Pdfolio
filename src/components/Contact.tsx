@@ -2,7 +2,7 @@
 
 import emailjs from '@emailjs/browser';
 import dynamic from 'next/dynamic';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { MessageSquare, Send, UserRound } from 'lucide-react';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 
@@ -47,22 +47,27 @@ const inputClasses =
 const errorClasses =
   'border-rose-500 focus:border-rose-500 focus:ring-rose-500/30 disabled:border-rose-500/60';
 
-const cardVariants = {
+/** Typed variants + tuple-typed easing to satisfy Framer Motion types */
+const cardVariants: Variants = {
   hidden: { opacity: 0, x: -40 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.65, ease: [0.16, 0.84, 0.44, 1] },
+    transition: { duration: 0.65, ease: [0.16, 0.84, 0.44, 1] as const },
   },
 };
 
-const earthVariants = {
+const earthVariants: Variants = {
   hidden: { opacity: 0, x: 40, scale: 0.95 },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 0.65, 0.4, 0.95], delay: 0.15 },
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 0.65, 0.4, 0.95] as const,
+      delay: 0.15,
+    },
   },
 };
 

@@ -181,7 +181,7 @@ function Starfield({
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, [starCount, meteorEveryMs, useReducedMotion]);
+  }, [starCount, meteorEveryMs, reduceMotion]); // ✅ depend on the value, not the hook function
 
   return (
     <canvas
@@ -248,7 +248,7 @@ function TiltCard({
         scale: reduce ? 1 : 1.02,
         boxShadow: reduce ? undefined : '0px 8px 24px rgba(0,0,0,0.15)',
       }}
-      transition={{ duration: 0.25, ease: [0.2, 0.65, 0.3, 0.9] }}
+      transition={{ duration: 0.25, ease: [0.2, 0.65, 0.3, 0.9] as const }}
     >
       {children}
     </motion.div>
@@ -417,7 +417,7 @@ export default function StarryProjectGrid({
       }, index * 1000);
       timers.push(t);
     });
-  return () => {
+    return () => {
       timers.forEach(clearTimeout);
       intervals.forEach(clearInterval);
     };
