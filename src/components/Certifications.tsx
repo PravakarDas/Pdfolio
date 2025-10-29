@@ -1,6 +1,6 @@
 'use client';
 
-import { BadgeCheck, ChevronDown, ChevronUp, Award } from 'lucide-react';
+import { BadgeCheck, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
@@ -121,7 +121,7 @@ export default function Certifications() {
   const MD_DEFAULT = 4;
   const LG_DEFAULT = 6;
 
-  const [showAllGrid, setShowAllGrid] = React.useState(false);
+  const [showAllGrid] = React.useState(false);
   const [pageCount, setPageCount] = React.useState(0);
   const [pageIndex, setPageIndex] = React.useState(0);
   const scrollerRef = React.useRef<HTMLDivElement | null>(null);
