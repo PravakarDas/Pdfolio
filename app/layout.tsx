@@ -11,7 +11,7 @@ const montserrat = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "Pravakar | backend developer",
+  title: "PravakarDas",
   description: `Hi, I’m Pravakar Das, a developer working on real-world projects using my technical skills
 Please feel free to explore my repositories
 I’m always open to feedback and constructive advice. Your suggestions will help me improve, and I’ll do my best to implement them`,
