@@ -2,8 +2,6 @@ import { RiNextjsFill, RiNodejsFill, RiReactjsFill, RiTailwindCssFill } from "re
 import { AboutSection, Achivement, ExperienceSection, HomeSection, PortfolioSection, SkillsSection, EducationSection } from "../types/Interfaces";
 import { SiC, SiCplusplus, SiDart, SiDocker, SiExpress, SiFlutter, SiGit, SiGithub, SiJavascript, SiLinux, SiMongodb, SiMongoose, SiMysql, SiPostgresql, SiPrisma, SiPython, SiTypescript } from "react-icons/si";
 
-
-
 export const homeData: HomeSection = {
   name: "Pravakar",
   title: "Pravakar Das",
@@ -39,23 +37,23 @@ export const skillsData: SkillsSection = {
     { name: "JavaScript", icon: SiJavascript, category: "language" },
     { name: "TypeScript", category: "language", icon: SiTypescript },
     { name: "Python", icon: SiPython, category: "language" },
-    { name: "Dart", icon: SiDart, category: "language" },
-    { name: "C", icon: SiC, category: "language" },
-    { name: "Cpp", icon: SiCplusplus, category: "language" },
+    // { name: "Dart", icon: SiDart, category: "language" },
+    // { name: "C", icon: SiC, category: "language" },
+    // { name: "Cpp", icon: SiCplusplus, category: "language" },
     { name: "github", icon: SiGithub, category: "devops" },
     { name: "git", icon: SiGit, category: "devops" },
     { name: "Next.js", icon: RiNextjsFill, category: "framework" },
     { name: "React.js", icon: RiReactjsFill, category: "library" },
     { name: "Node.js", icon: RiNodejsFill, category: "runtime" },
     { name: "Express.js", icon: SiExpress, category: "framework" },
-    { name: "Prisma ORM", icon: SiPrisma, category: "library" },
-    { name: "PostgreSQL", icon: SiPostgresql, category: "database" },
+    // { name: "Prisma ORM", icon: SiPrisma, category: "library" },
+    // { name: "PostgreSQL", icon: SiPostgresql, category: "database" },
     { name: "TailwindCSS", category: "framework", icon: RiTailwindCssFill },
-    { name: "Docker", category: "devops", icon: SiDocker },
+    // { name: "Docker", category: "devops", icon: SiDocker },
     { name: "MongoDb", category: "database", icon: SiMongodb },
-    { name: "Mongoose ORM", category: "library", icon: SiMongoose },
+    // { name: "Mongoose ORM", category: "library", icon: SiMongoose },
     { name: "MySql", category: "database", icon: SiMysql },
-    { name: "Flutter", category: "framework", icon: SiFlutter },
+    // { name: "Flutter", category: "framework", icon: SiFlutter },
     { name: "OOP", category: "CS Fundamentals" },
     { name: "DSA", category: "CS Fundamentals" },
     { name: "Linux (basic commands)", icon: SiLinux, category: "devops" },
@@ -68,82 +66,139 @@ export const portfolioData: PortfolioSection = {
   projects: [
     {
       id: "p1",
-      title: "Bangla-py",
-      category: ["backend", "fullstack", 'frontend'],
-      description:
-        `bengali to python language converter | Developed an interactive platform for children to learn Python programming in their native Bengali
-        language. The platform allows kids to write code in Bengali, displays errors and feedback in Bengali,
-        and tracks learning progress over time using a visual heatmap`,
-      technologies: ["TypeScript", "JavaScript", "React.js", "Next.js", "Node.js", "Express", "PostgreSql", "prisma", "piston Api", "OAuth", "session"],
-      image: "https://i.ibb.co.com/vCgmY4Gm/Screenshot-2025-11-24-223933.png",
+      title: "IntegraFlow",
+      category: ["fullstack", "frontend", "backend"],
+      description: `Enterprise-grade ERP platform with comprehensive admin panel, HR, inventory, sales, and automated workflows for scalable business management.`,
+      technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "MongoDB", "JWT", "ShadCN/UI"],
+      image: "/assets/projects/source/5013256.jpg",
       github: {
-        frontend: 'https://github.com/marmiju/banglaPy',
-        backend: 'https://github.com/marmiju/banglaPy_backend'
+        frontend: "https://github.com/PravakarDas/IntegraFlow"
       },
-      liveDemo: "https://bangla-py.vercel.app",
+      liveDemo: "https://integra-flow-iota.vercel.app",
       feature: [
-        "Interactive Python tutorials in Bengali",
-        "Beginner-friendly explanations and examples",
-        "Live coding editor and test cases execution",
-        "Authentication system with Google Login",
-        "User progress tracking & learning badges",
-        "REST API backend with scalable architecture",
-        "Mobile-first responsive UI",
-        "Quiz system with instant feedback",
-        "Code challenges with difficulty levels",
-        "Dynamic roadmap for Python learning path",
-        "Dark/Light theme support",
-        "Secure database with Prisma + PostgreSQL",
-        "Admin panel for managing lessons & users"
+        "Modern ERP with inventory, HR, sales & analytics modules",
+        "Responsive, database-driven UI with real-time metrics",
+        "Dark/Light theme support and PWA readiness",
+        "Secure authentication with JWT",
+        "Role-based access control and dashboards",
+        "Reusable components with shadcn/ui",
+        "SEO-optimized with structured data",
+        "API routes for multi-module data handling"
       ]
     },
-
     {
       id: "p2",
-      title: "Bidrirectional Chat App",
-      category: ['backend',],
-      description:
-        ` frontend_under_development | Designed and developed a scalable real-time chat application backend that supports group messaging, online presence, and live typing indicators. The system efficiently handles both persistent message storage and real-time communication using REST APIs and WebSockets, ensuring reliable message delivery and a smooth user experience.`,
-      technologies: ["Node.js", "Express.js", "MongoDB with Mongoose", "Socket.io (Web Socket)", "Rest API", "JWT Authentication", "vercel"],
-      image: `https://i.ibb.co.com/8LV54Rw5/p2.png`,
+      title: "Employee Attendance Portal",
+      category: ["fullstack", "backend", "ml"],
+      description: `AI-powered employee attendance system using facial recognition for automated check-in/out, analytics, and real-time logging.`,
+      technologies: ["Next.js", "React", "Tailwind CSS", "Node.js", "Express", "MongoDB", "FastAPI", "DeepFace", "JWT"],
+      image: "/assets/projects/source/5013256.jpg",
       github: {
-        backend: 'https://github.com/marmiju/chat_backend'
+        frontend: "https://github.com/PravakarDas/Employee-Attendence-Portal",
+        backend: "https://github.com/PravakarDas/Employee-Attendence-Portal"
       },
+      liveDemo: "",
       feature: [
-        "Implemented Socket.IO rooms for efficient group- specific broadcasting",
-        "Used REST APIs for initial data loading and WebSockets for live updates",
-        "Designed a delivery status system(sent/ read) per message",
-        "Managed multiple socket connections per user for accurate presence tracking",
-        "Ensured clean socket lifecycle handling(connect, disconnect, join, leave)",
-        "Prevented race conditions and memory leaks in real - time events"
+        "AI-powered facial recognition for attendance",
+        "JWT authentication and role-based access",
+        "Real-time employee & admin dashboards",
+        "Attendance analytics and reports export",
+        "Secure RESTful backend services",
+        "Responsive UI with Tailwind CSS",
+        "Modular frontend with Next.js",
+        "DeepFace based vision model integration"
       ]
     },
     {
       id: "p3",
-      title: "nids_web",
-      category: ['backend', 'frontend', 'fullstack'],
-      description:
-        "Built a responsive and dynamic website for NIDS College featuring admission info, notices, faculty details, contests, programs, and facilities with a clean and user-friendly UI.",
-      technologies: ["React.js", "Next.js", "node.js", "express.js", "Mysql", "rest API", "JWT Authentication", "vercel"],
-      image: "https://i.ibb.co.com/TMXBRRHk/Chat-x.png",
-      liveDemo: "https://nids-two.vercel.app",
+      title: "Auris",
+      category: ["fullstack", "frontend", "backend"],
+      description: `A full-featured hotel booking platform built on the MERN stack with dynamic reservations, payments, and responsive UI elements.`,
+      technologies: ["MongoDB", "Express.js", "React.js", "Node.js"],
+      image: "/assets/projects/source/5013256.jpg",
       github: {
-        backend: 'https://github.com/marmiju/nidsb',
-        frontend: 'https://github.com/marmiju/nids.com',
+        frontend: "https://github.com/PravakarDas/Auris",
+        backend: "https://github.com/PravakarDas/Auris"
       },
+      liveDemo: "https://hotel-client-side.web.app",
       feature: [
-        "responsive design",
-        "Dark, Light mode based on user preference and system settings",
-        "Student Contests and Programs",
-        "tracking user progress in contests",
-        "Admission information",
-        "Authentication system with Google Login",
-        "College programmes and facilities",
-        "teachers' information",
-        "notice board",
-        "Contact section for inquiries and more",
+        "Hotel reservation management",
+        "User authentication and sessions",
+        "Real-time booking calendar",
+        "Responsive UI across devices",
+        "Payment integration",
+        "MERN stack architecture",
+        "Dynamic room availability updates",
+        "Clean UI with hotel-focused layouts"
+      ]
+    },
+    {
+      id: "p4",
+      title: "Essential Tools",
+      category: ["backend", "fullstack", "utility"],
+      description: `Privacy-first PDF toolkit built with Flask offering merge, split, compress, convert and other utilities with a sleek UI.`,
+      technologies: ["Python", "Flask", "HTML", "CSS", "JavaScript"],
+      image: "/assets/projects/source/5013256.jpg",
+      github: {
+        backend: "https://github.com/PravakarDas/Essential_Tools"
+      },
+      liveDemo: "https://essential-tools-7iuo.onrender.com",
+      feature: [
+        "Merge and split PDF files",
+        "Compress and convert PDFs",
+        "Flask-powered REST backend",
+        "Secure local-first processing",
+        "Clean glassmorphic UI",
+        "Drag and drop file uploads",
+        "Fast PDF transformations",
+        "Utility-focused toolkit"
+      ]
+    },
+    {
+      id: "p5",
+      title: "HostCast",
+      category: ["backend", "networking", "utility"],
+      description: `High-performance LAN file sharing and screen mirroring tool for seamless collaboration on local networks.`,
+      technologies: ["Python", "Socket Programming", "Networking"],
+      image: "/assets/projects/source/5013256.jpg",
+      github: {
+        backend: "https://github.com/PravakarDas/HostCast"
+      },
+      liveDemo: "",
+      feature: [
+        "Local network file sharing",
+        "Real-time screen mirroring",
+        "Low-latency streaming",
+        "Cross-device connectivity",
+        "Simple CLI UI",
+        "Optimized networking performance",
+        "Secure local transfers",
+        "Efficient bandwidth utilization"
+      ]
+    },
+    {
+      id: "p6",
+      title: "Arena Strike",
+      category: ["game", "python", "graphics"],
+      description: `3D cannon-defense game using Python and OpenGL with gesture-based gameplay mechanics.`,
+      technologies: ["Python", "OpenGL", "MediaPipe"],
+      image: "/assets/projects/source/5013256.jpg",
+      github: {
+        backend: "https://github.com/PravakarDas/Arena_Strike"
+      },
+      liveDemo: "",
+      feature: [
+        "3D cannon-defense gameplay",
+        "Python game engine with OpenGL",
+        "Gesture-based controls with MediaPipe",
+        "Immersive game environment",
+        "Real-time physics interactions",
+        "Dynamic obstacles and enemies",
+        "Performance-optimized rendering",
+        "Keyboard & gesture input support"
       ]
     }
+
   ]
 };
 
@@ -152,25 +207,26 @@ export const experienceData: ExperienceSection = {
   experiences: [
     {
       id: "e1",
-      role: "junior developer",
-      company: "Inovate Digital",
-      duration: " april 2024 - Nov 2025",
+      role: "Researcher (machine learning / software engineering)",
+      company: "Brac University",
+      duration: "Oct 2024 - Oct 2025",
       description: [
-        "Built custom websites and web apps for clients.",
-        "Created backend APIs using Node.js & Prisma.",
-        "Improved performance and SEO of client websites."
+        "Designing and executing an applied research project from proposal to evaluation and reporting.",
+        "Collecting and curating datasets; building reproducible preprocessing and training pipelines.",
+        "Developing and iterating on ML models; comparing baselines with clear metrics and ablations.",
+        "Documenting methodology and results; preparing artifacts for thesis defense and publication."
       ]
     },
     {
       id: "e2",
-      role: "self-practiced developer",
-      company: "Self Employed",
-      duration: " jan 2023 - present",
+      role: "Backend / Full-Stack Developer",
+      company: "RenderLab (Remote)",
+      duration: "Sep 2025 - Present",
       description: [
-        "exploring new technologies and frameworks.",
-        "creating personal projects to enhance my skills.",
-        "developed problem-solving and coding abilities through consistent practice.",
-        "makes mobile apps using flutter framework."
+        "Building and maintaining backend services and REST APIs; integrating databases and authentication.",
+        "Collaborating on Next.js and React frontends and shared component patterns when needed.",
+        "Adding tests and CI/CD workflows to improve reliability and deployment speed.",
+        "Participating in code reviews, grooming, and incremental delivery of features."
       ]
     },
   ]
@@ -238,7 +294,7 @@ export const educationData: EducationSection = {
       institution: "BRAC University",
       location: "Dhaka, Bangladesh",
       duration: "2022 – 2025",
-      result: "CGPA: 2.8 / 4.0",
+      
       focus: [
         "Machine Learning",
         "Software Engineering"
@@ -250,7 +306,7 @@ export const educationData: EducationSection = {
       institution: "Islamia Degree College",
       location: "Chattogram, Bangladesh",
       duration: "2020 – 2022",
-      result: "GPA: 4.93 / 5.0"
+      
     },
     {
       id: "ed3",
@@ -258,7 +314,7 @@ export const educationData: EducationSection = {
       institution: "Hazi Md. Mohsin Government High School",
       location: "Chattogram, Bangladesh",
       duration: "2012 – 2018",
-      result: "GPA: 4.84 / 5.0"
+      
     }
   ]
 };
