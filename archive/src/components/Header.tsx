@@ -1,0 +1,250 @@
+﻿"use client";
+
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
+
+// ---- Types
+export type NavLink = { href: `#${string}`; label: string };
+
+const navLinks: NavLink[] = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#certifications", label: "Certifications" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+
+declare global {
+  interface Window {
+    __scrollLockUntil?: number;
+  }
+}
+
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState<NavLink["href"]>("#home");
+  const [headerH, setHeaderH] = useState(96); // sensible default
+  const [scrolled, setScrolled] = useState(false);
+
+  const headerRef = useRef<HTMLElement | null>(null);
+  const menuRef = useRef<HTMLUListElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  // ---- Measure header height (handles responsive + dynamic changes)
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const update = () => setHeaderH(el.getBoundingClientRect().height || 96);
+    update();
+
+    // ResizeObserver for dynamic height changes (e.g., wrap to 2 lines on mobile)
+    let ro: ResizeObserver | undefined;
+    if (typeof window.ResizeObserver !== "undefined") {
+      ro = new window.ResizeObserver(() => update());
+      ro.observe(el);
+    }
+
+    // Fallback: listen to resize
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("resize", update);
+      ro?.disconnect?.();
+    };
+  }, []);
+
+  // ---- Detect scroll to tighten the glassmorphism on move
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // ---- Track active section using IntersectionObserver (robust vs. offsetTop)
+  useEffect(() => {
+    const ids = navLinks.map(({ href }) => href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (!sections.length) return;
+
+    // Avoid flicker during programmatic scrolling
+    const readLockUntil = () =>
+      (typeof window !== "undefined" && typeof window.__scrollLockUntil === "number"
+        ? window.__scrollLockUntil
+        : 0);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (Date.now() < readLockUntil()) return; // ignore while we scroll programmatically
+
+        // Prefer the entry that is most visible and above the fold
+        const onScreen = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
+
+        if (onScreen.length > 0) {
+          const topmost = onScreen[0].target as HTMLElement;
+          setActive(("#" + topmost.id) as NavLink["href"]);
+        } else {
+          // When nothing is intersecting (fast scroll), pick the closest above the viewport line
+          let best: HTMLElement | null = null;
+          let bestTop = -Infinity;
+          const y = window.scrollY + headerH + 2;
+          for (const s of sections) {
+            const top = s.offsetTop;
+            if (top <= y && top > bestTop) {
+              bestTop = top;
+              best = s;
+            }
+          }
+          if (best) setActive(("#" + best.id) as NavLink["href"]);
+        }
+      },
+      {
+        // Bias the observer so a section counts as active when its top is just below the sticky header
+        root: null,
+        rootMargin: `-${headerH + 6}px 0px -60% 0px`,
+        threshold: [0.1, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    sections.forEach((s) => io.observe(s));
+
+    // Also react on hash changes (e.g. browser back/forward)
+    const onHash = () => {
+      const id = window.location.hash.slice(1);
+      if (id) setActive(("#" + id) as NavLink["href"]);
+    };
+    window.addEventListener("hashchange", onHash);
+
+    return () => {
+      sections.forEach((s) => io.unobserve(s));
+      io.disconnect();
+      window.removeEventListener("hashchange", onHash);
+    };
+  }, [headerH]);
+
+  // ---- Smooth, accurate scrolling that accounts for sticky header height
+  const handleNavClick = (href: NavLink["href"]) => () => {
+    window.__scrollLockUntil = Date.now() + 400;
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const top = el.getBoundingClientRect().top + window.scrollY - headerH - 4;
+    window.scrollTo({ top, behavior: "smooth" });
+
+    setActive(href); // immediate visual feedback
+    setIsOpen(false); // close mobile nav once a destination is chosen
+
+    // Unlock (kept in closure for safety)
+    setTimeout(() => {
+      // no-op; IntersectionObserver will set the final active state when settled
+    }, 420);
+  };
+
+  // ---- Close mobile menu on outside click / ESC
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(t) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(t)
+      ) {
+        setIsOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
+
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isOpen]);
+
+  return (
+    <header
+      ref={headerRef}
+      className="fixed top-0 z-50 w-full transition-transform duration-300 will-change-transform"
+    >
+      {/* Hairline gradient like a premium navbar */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
+
+      {/* Glassy bar */}
+      <div
+        className={[
+          "border-b border-white/10 transition-[background-color,border-color,backdrop-filter,box-shadow] duration-300",
+          scrolled
+            ? "border-white/15 bg-[#050816]/95 shadow-[0_20px_40px_rgba(5,8,22,0.6)] backdrop-blur-xl"
+            : "bg-[#050816]/65 shadow-[0_12px_30px_rgba(6,10,30,0.35)] backdrop-blur-lg",
+        ].join(" ")}
+      >
+        <nav
+          className="container mx-auto flex items-center justify-between px-6 py-3 md:py-4"
+          aria-label="Primary"
+        >
+          {/* Left: badge */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <span
+              className="inline-flex items-center rounded-full border border-emerald-400/40 bg-emerald-500/15 px-3 py-1 text-sm font-medium text-emerald-200 shadow-[0_10px_25px_rgba(16,185,129,0.25)]"
+              title="Open to Work"
+            >
+              Open to Work
+            </span>
+          </div>
+
+          {/* Hamburger */}
+          <button
+            ref={buttonRef}
+            className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-200 transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            onClick={() => setIsOpen((v) => !v)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
+            aria-controls="site-menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+
+          {/* Links */}
+          <ul
+            id="site-menu"
+            ref={menuRef}
+            className={`absolute left-0 top-full w-full border-b border-white/10 bg-[#050816]/95 px-6 py-4 transition-[opacity,transform] duration-200 ease-out lg:static lg:flex lg:w-auto lg:items-center lg:gap-6 lg:border-none lg:bg-transparent lg:px-0 lg:py-0
+              ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0 lg:pointer-events-auto lg:translate-y-0 lg:opacity-100"}
+            `}
+          >
+            {navLinks.map(({ href, label }) => {
+              const isActive = active === href;
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    onClick={handleNavClick(href)}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`block rounded-md px-2 py-2 text-sm text-slate-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400
+                      ${isActive ? "font-semibold text-white" : "hover:text-white/90"}
+                    `}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+}
