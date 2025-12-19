@@ -10,18 +10,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Exclude archive folder from page routing
-  pageExtensions: ['tsx', 'ts', 'jsx', 'js'].map(ext => {
-    return ext;
-  }),
-  webpack: (config) => {
-    // Ignore the archive folder completely
-    config.watchOptions = {
-      ...config.watchOptions,
-      ignored: ['**/node_modules', '**/archive/**'],
-    };
-    return config;
-  },
 };
 
 export default nextConfig;
