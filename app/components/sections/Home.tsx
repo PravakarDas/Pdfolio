@@ -14,11 +14,12 @@ const HomeSection = () => {
                     <p className="font-semibold">{homeData.title}</p>
                     <p className="text-gray-600 text-base md:text-sm ">{homeData.description}</p>
                     <div className="flex flex-wrap gap-2">
-                        <Link className="rounded w-[50%] md:w-[20%] flex justify-center bg-gray-950 p-2 text-nowrap text-white" target="_blank" href={'https://wa.me/+8801860131470?text=hello I want to talk to you'}>Hire Me</Link>
+                        <Link className="rounded w-[50%] md:w-[20%] flex justify-center bg-gray-950 p-2 text-nowrap text-white" target="_blank" href={'https://wa.me/+8801515675655?text=hello I want to talk to you'}>Hire Me</Link>
                         <Link className="bg-black/90 w-[20%] md:w-10 text-white p-2 rounded" href={homeData.socialLinks.github}><Github /></Link>
                         <Link className="bg-black/90 w-[20%] md:w-10 text-white p-2 rounded" href={homeData.socialLinks.linkedin}><Linkedin /></Link>
                         <Link className="bg-black/90 w-[20%] md:w-10 text-white p-2 rounded " href={homeData.socialLinks.facebook}><Facebook /></Link>
-                        <Link className="bg-gray-950 w-[50%] md:w-[20%] justify-center text-white p-2 rounded  h-10" href={homeData.resume}>↓ Rusume</Link>
+                        <Link className="bg-gray-950 w-[50%] md:w-[20%] justify-center text-white p-2 rounded  h-10" href={homeData.resume}>Resume</Link>
+                        <Link className="bg-gray-950 w-[50%] md:w-[20%] justify-center text-white p-2 rounded  h-10" href={homeData.cv}>CV</Link>
                     </div>
                 </div>
 
