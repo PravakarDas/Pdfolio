@@ -9,8 +9,8 @@ export const homeData: HomeSection = {
   description:
     "I’m a backend developer specialising in JavaScript, TypeScript, Node.js, Prisma, and modern frontend tools like Next.js. I love turning ideas into clean and functional digital products.",
   profileImage: "/assets/profile.png",
-  resume: 'assets/CV & Resume/Resume.pdf',
-  cv: 'assets/CV & Resume/CV.pdf',
+  resume: '/assets/CV & Resume/Resume.pdf',
+  cv: '/assets/CV & Resume/CV.pdf',
   socialLinks: {
     github: "https://github.com/PravakarDas",
     linkedin: "https://www.linkedin.com/in/pravakarda",

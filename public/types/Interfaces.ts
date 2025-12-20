@@ -9,6 +9,7 @@ export interface HomeSection {
   description: string;
   profileImage: string;
   resume: string,
+  cv: string,
   socialLinks: {
     github: string;
     linkedin: string;
